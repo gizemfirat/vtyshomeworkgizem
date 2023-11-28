@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Vtys.Core\Vtys.Core.csproj" />
+    <ProjectReference Include="..\Vtys.Homework.DataAccess\Vtys.Homework.DataAccess.csproj" />
+    <ProjectReference Include="..\Vtys.Homework.Entities\Vtys.Homework.Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Abstract\" />
+    <Folder Include="Concrete\" />
+  </ItemGroup>
+
+</Project>
