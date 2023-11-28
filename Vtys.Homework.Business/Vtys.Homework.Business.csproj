@@ -12,9 +12,4 @@
     <ProjectReference Include="..\Vtys.Homework.Entities\Vtys.Homework.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concrete\" />
-  </ItemGroup>
-
 </Project>

@@ -1,6 +1,6 @@
 ﻿namespace Vtys.Core.Entities
 {
-    public interface IEntitiy
+    public interface IEntity
     {
         public long Id { get; set; }
     }

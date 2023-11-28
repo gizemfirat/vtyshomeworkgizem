@@ -7,13 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Vtys.Core\Vtys.Core.csproj" />
-    <ProjectReference Include="..\Vtys.Homework.Entities\Vtys.Homework.Entities.csproj" />
+    <PackageReference Include="Npgsql" Version="8.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstract\" />
-    <Folder Include="Concrete\EntityFramework\" />
+    <ProjectReference Include="..\Vtys.Core\Vtys.Core.csproj" />
+    <ProjectReference Include="..\Vtys.Homework.Entities\Vtys.Homework.Entities.csproj" />
   </ItemGroup>
 
 </Project>

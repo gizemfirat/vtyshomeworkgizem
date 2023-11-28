@@ -3,7 +3,7 @@ using Vtys.Core.Entities;
 
 namespace Vtys.Core.DataAccess
 {
-    public interface IEntityRepository<T> where T : class, IEntitiy, new()
+    public interface IEntityRepository<T> where T : class, IEntity, new()
     {
         T Add(T entity);
 

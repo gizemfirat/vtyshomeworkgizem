@@ -5,7 +5,7 @@ using Vtys.Core.Entities;
 namespace Vtys.Core.DataAccess.EntityFramework
 {
     public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity> 
-        where TEntity : class, IEntitiy, new()
+        where TEntity : class, IEntity, new()
         where TContext : DbContext, new()
     {
         public TEntity Add(TEntity entity)
