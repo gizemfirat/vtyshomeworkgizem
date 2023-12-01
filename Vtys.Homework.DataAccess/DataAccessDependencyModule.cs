@@ -15,8 +15,8 @@ namespace Vtys.Homework.DataAccess
         public DataAccessDependencyModule(IServiceCollection services)
         {
             _services = services;
-            //UseEntityFramework<Employee>();
-            _services.AddSingleton<IEntityRepository<Employee>, MockEmployeeDal>();
+            UseEntityFramework<Employee>();
+           // _services.AddSingleton<IEntityRepository<Employee>, MockEmployeeDal>();
         }
 
         private void UseEntityFramework<TEntity>() where TEntity : class, IEntity, new()

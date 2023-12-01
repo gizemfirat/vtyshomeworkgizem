@@ -15,9 +15,14 @@ namespace Vtys.Homework.WebApi.Controllers
 
         [HttpGet]
         [Route("api/employees")]
-        public string GetAll()
+        public IActionResult GetAll()
         {
-            return _employeeService.GetAll().ToJson();
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _employeeService.GetAll().ToJson(),
+                StatusCode = 200,
+            };
         }
     }
 }

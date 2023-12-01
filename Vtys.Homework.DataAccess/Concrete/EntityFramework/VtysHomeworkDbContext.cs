@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Reflection.Metadata;
 using Vtys.Core.DataAccess;
 using Vtys.Core.DependencyManagement;
 using Vtys.Homework.Entities.Concrete;
@@ -22,9 +24,13 @@ namespace Vtys.Homework.DataAccess.Concrete.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Source>().UseTptMappingStrategy();
+            modelBuilder.Entity<Employee>().UseTptMappingStrategy();
         }
 
+        public DbSet<Source> Sources { get; set; }
+
         public DbSet<Employee> Employees { get; set; }
+
     }
 }

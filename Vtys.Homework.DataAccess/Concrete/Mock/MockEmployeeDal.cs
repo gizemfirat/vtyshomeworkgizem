@@ -43,13 +43,13 @@ namespace Vtys.Homework.DataAccess.Concrete.Mock
                 new Employee()
                 {
                     Id= 1, 
-                    Name="Emrecan", 
+                    //Name="Emrecan", 
                     Surname="Tuna"
                 },
                                 new Employee()
                 {
                     Id= 1,
-                    Name="Gizem",
+                   // Name="Gizem",
                     Surname="Fırat"
                 }
             };

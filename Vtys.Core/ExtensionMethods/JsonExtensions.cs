@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using Vtys.Core.Constants;
 
 namespace Vtys.Core.ExtensionMethods
@@ -7,7 +8,10 @@ namespace Vtys.Core.ExtensionMethods
     {
         public static string ToJson(this object obj)
         {
-            return JsonConvert.SerializeObject(obj, Formatting.None);
+            return JsonConvert.SerializeObject(obj, Formatting.None, new JsonSerializerSettings()
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),             
+            });
         }
 
         public static T FromJson<T>(this string json)

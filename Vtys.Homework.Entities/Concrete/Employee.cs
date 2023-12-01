@@ -2,12 +2,10 @@
 
 namespace Vtys.Homework.Entities.Concrete
 {
-    public class Employee : IEntity
+    public class Employee : Source
     {
-        public long Id { get; set; }
-
-        public string Name { get; set; }
-
         public string Surname { get; set; }
+
+        public long DepartmentId {  get; set; }
     }
 }

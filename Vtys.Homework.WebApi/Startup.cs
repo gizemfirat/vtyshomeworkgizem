@@ -16,7 +16,7 @@ namespace Vtys.Homework.WebApi
             services.AddScoped(x => new DbConnectionInfo()
             {
                 Host = "localhost",
-                Port = "5433",
+                Port = "5432",
                 Username = "postgres",
                 Password = "123456",
                 Database = "vtyshomework"
