@@ -1,4 +1,5 @@
-﻿using Vtys.Core.DataAccess;
+﻿using Microsoft.AspNetCore.Cors.Infrastructure;
+using Vtys.Core.DataAccess;
 using Vtys.Core.DependencyManagement;
 using Vtys.Homework.DataAccess;
 using IHostingEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
@@ -12,6 +13,16 @@ namespace Vtys.Homework.WebApi
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("reactwebui", policy =>
+                {
+                    policy.WithOrigins("http://localhost:3000")
+                                       .AllowAnyHeader()
+                                       .AllowAnyMethod();
+                });
+            });
 
             services.AddScoped(x => new DbConnectionInfo()
             {
@@ -38,6 +49,7 @@ namespace Vtys.Homework.WebApi
                 app.UseSwaggerUI();
             }
 
+            app.UseCors("reactwebui");
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
