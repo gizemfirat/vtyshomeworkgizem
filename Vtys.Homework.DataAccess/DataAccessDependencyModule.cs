@@ -16,6 +16,7 @@ namespace Vtys.Homework.DataAccess
         {
             _services = services;
             UseEntityFramework<Employee>();
+            UseEntityFramework<User>();
            // _services.AddSingleton<IEntityRepository<Employee>, MockEmployeeDal>();
         }
 
