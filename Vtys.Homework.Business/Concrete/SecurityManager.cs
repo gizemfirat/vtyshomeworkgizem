@@ -20,6 +20,7 @@ namespace Vtys.Homework.Business.Concrete
                 Email = model.Email,
                 Username = model.Username,
                 Password = model.Password,
+                Surname = model.Surname,
             });
 
             return new SuccessResult("", user);

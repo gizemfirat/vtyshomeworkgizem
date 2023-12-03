@@ -12,6 +12,7 @@ namespace Vtys.Homework.Business
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<EmployeeManager>().As<IEmployeeService>();
+            builder.RegisterType<SecurityManager>().As<ISecurityService>();
 
             builder.Register(Assembly.GetExecutingAssembly());
         }
