@@ -34,5 +34,7 @@ namespace Vtys.Homework.DataAccess.Concrete.EntityFramework
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Machine> Machines { get; set; }
+
     }
 }

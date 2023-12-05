@@ -65,7 +65,7 @@ const RegisterPage = () => {
           {alertMessage}
         </Alert>
       </Snackbar>
-      <Grid marginTop={6} container>
+      <Grid marginTop={12} container>
         <Grid md={4}></Grid>
         <Grid md={4}>
           <Paper>
