@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Reflection.Metadata;
 using Vtys.Core.DataAccess;
 using Vtys.Core.DependencyManagement;
 using Vtys.Homework.Entities.Concrete;
@@ -35,6 +33,19 @@ namespace Vtys.Homework.DataAccess.Concrete.EntityFramework
         public DbSet<User> Users { get; set; }
 
         public DbSet<Machine> Machines { get; set; }
+
+        public DbSet<Project> Projects { get; set; }
+
+        public DbSet<Entities.Concrete.Task> Tasks { get; set; }
+
+        public DbSet<Department> Departments { get; set; }
+
+        public DbSet<TaskSource> TaskSources { get; set; }
+
+        public DbSet<ProjectSource> ProjectSources { get; set; }
+
+        public DbSet<Entities.Concrete.TaskStatus> TaskStatuses { get; set; }
+
 
     }
 }

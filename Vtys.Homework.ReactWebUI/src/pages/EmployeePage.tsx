@@ -8,6 +8,7 @@ const EmployeePage = () => {
   const navigate = useNavigate();
 
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
     apiHelper.get<Employee[]>("employees").then((data) => {
@@ -17,24 +18,24 @@ const EmployeePage = () => {
 
   return (
     <Grid marginTop={12} container>
-      <Grid md={1}></Grid>
-      <Grid md={10}>
+      <Grid md={2}></Grid>
+      <Grid md={8}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="employee table">
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell>Ad</TableCell>
-                <TableCell>Soyad</TableCell>
+                <TableCell align="right">ID</TableCell>
+                <TableCell align="right">Ad</TableCell>
+                <TableCell align="right">Soyad</TableCell>
                 <TableCell align="right">Departman ID'si</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {employees.map((employee) => (
                 <TableRow key={employee.id}>
-                  <TableCell>{employee.id}</TableCell>
-                  <TableCell>{employee.name}</TableCell>
-                  <TableCell>{employee.surname}</TableCell>
+                  <TableCell align="right">{employee.id}</TableCell>
+                  <TableCell align="right">{employee.name}</TableCell>
+                  <TableCell align="right">{employee.surname}</TableCell>
                   <TableCell align="right">{employee.departmentId}</TableCell>
                 </TableRow>
               ))}
@@ -42,7 +43,7 @@ const EmployeePage = () => {
           </Table>
         </TableContainer>
       </Grid>
-      <Grid md={1}></Grid>
+      <Grid md={2}></Grid>
     </Grid>
   );
 }

@@ -17,20 +17,20 @@ const MachinePage = () => {
 
   return (
     <Grid marginTop={12} container>
-      <Grid md={1}></Grid>
-      <Grid md={10}>
+      <Grid md={3}></Grid>
+      <Grid md={6}>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="machine table">
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
+                <TableCell align="right">ID</TableCell>
                 <TableCell align="right">Seri Numarası</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {machines.map((machine) => (
                 <TableRow key={machine.id}>
-                  <TableCell>{machine.id}</TableCell>
+                  <TableCell align="right">{machine.id}</TableCell>
                   <TableCell align="right">{machine.serialNumber}</TableCell>
                 </TableRow>
               ))}
@@ -38,7 +38,7 @@ const MachinePage = () => {
           </Table>
         </TableContainer>
       </Grid>
-      <Grid md={1}></Grid>
+      <Grid md={3}></Grid>
     </Grid>
   );
 }

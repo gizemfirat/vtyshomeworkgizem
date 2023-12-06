@@ -11,8 +11,11 @@ const Layout = () => {
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
               G.E.
             </Typography>
-            <Button color="inherit">Kaynak Yönetimi</Button>
-            <Button color="inherit">Proje Yönetimi</Button>
+            <Button color="inherit">Departmanlar</Button>
+            <Button color="inherit">Çalışanlar</Button>
+            <Button color="inherit">Makineler</Button>
+            <Button color="inherit">Projeler</Button>
+            <Button color="inherit">İş Bölümleri</Button>
           </Toolbar>
         </AppBar>
       </Box>

@@ -18,6 +18,12 @@ namespace Vtys.Homework.DataAccess
             UseEntityFramework<Employee>();
             UseEntityFramework<User>();
             UseEntityFramework<Machine>();
+            UseEntityFramework<Project>();
+            UseEntityFramework<Entities.Concrete.Task>();
+            UseEntityFramework<Department>();
+            UseEntityFramework<TaskSource>();
+            UseEntityFramework<ProjectSource>();
+            UseEntityFramework<Entities.Concrete.TaskStatus>();
            // _services.AddSingleton<IEntityRepository<Employee>, MockEmployeeDal>();
         }
 
