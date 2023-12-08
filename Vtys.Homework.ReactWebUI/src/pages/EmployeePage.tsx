@@ -45,20 +45,22 @@ const EmployeePage = () => {
       </Grid>
       <Grid md={2}></Grid>
       <Grid md={10}>
-        <Grid container justifyContent={"flex-end"} marginTop={2}>
+        <Grid container justifyContent={"flex-end"} marginTop={1} spacing={1}>
+          <Grid item >
           <Button variant="contained" size="large">
             Ekle
           </Button>
-        </Grid>
-        <Grid container justifyContent={"flex-end"} marginTop={2}>
+          </Grid>
+          <Grid item >
           <Button variant="contained" size="large">
             Sil
           </Button>
-        </Grid>
-        <Grid container justifyContent={"flex-end"} marginTop={2}>
+          </Grid>
+          <Grid item >
           <Button variant="contained" size="large">
             Güncelle
           </Button>
+          </Grid>
         </Grid>
       </Grid>
     </Grid>

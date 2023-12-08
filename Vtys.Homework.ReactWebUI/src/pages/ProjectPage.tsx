@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
-import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Project from "../types/entities/Project";
 
 const ProjectPage = () => {
@@ -43,6 +43,26 @@ const ProjectPage = () => {
         </TableContainer>
       </Grid>
       <Grid md={2}></Grid>
+      <Grid md={2}></Grid>
+      <Grid md={8}>
+        <Grid container justifyContent={"flex-end"} marginTop={1} spacing={1}>
+          <Grid item >
+          <Button variant="contained" size="large">
+            Ekle
+          </Button>
+          </Grid>
+          <Grid item >
+          <Button variant="contained" size="large">
+            Sil
+          </Button>
+          </Grid>
+          <Grid item >
+          <Button variant="contained" size="large">
+            Güncelle
+          </Button>
+          </Grid>
+        </Grid>
+      </Grid>
     </Grid>
   );
 }

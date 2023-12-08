@@ -31,6 +31,24 @@ const apiHelper = {
       });
     });
   },
+
+  delete: <TResultData>(
+    endpoint: string
+  ): Promise<TResultData> => {
+    return new Promise((resolve, reject) => {
+      axios.delete(`${baseUrl}/${endpoint}`).then((response) => {
+        const result: Result<TResultData> = response.data;
+        if (result.isSuccess) {
+          resolve(result.data ?? ({} as TResultData));
+        } else {
+          reject(result.message);
+        }
+      }).catch((error) => {
+        reject(error);
+      });
+    });
+  },
+
 };
 
 export default apiHelper;

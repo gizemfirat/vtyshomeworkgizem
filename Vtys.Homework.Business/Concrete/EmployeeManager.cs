@@ -14,5 +14,10 @@ namespace Vtys.Homework.Business.Concrete
             var employees = Repository.GetList<Employee>();
             return new SuccessResult("", employees);
         }
+        [ExceptionResultAspect]
+        public void Add(Employee employee)
+        {
+            Repository.Add<Employee>(employee);
+        }
     }
 }

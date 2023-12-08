@@ -1,8 +1,13 @@
 import { AppBar, Box, Button, Grid, Toolbar, Typography } from "@mui/material";
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const Layout = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path:string) => {
+    navigate(path);
+  };
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -11,11 +16,11 @@ const Layout = () => {
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
               G.E.
             </Typography>
-            <Button color="inherit">Departmanlar</Button>
-            <Button color="inherit">Çalışanlar</Button>
-            <Button color="inherit">Makineler</Button>
-            <Button color="inherit">Projeler</Button>
-            <Button color="inherit">İş Bölümleri</Button>
+            <Button color="inherit" onClick={() => handleNavigation("/department")}>Departmanlar</Button>
+            <Button color="inherit" onClick={() => handleNavigation("/employee")}>Çalışanlar</Button>
+            <Button color="inherit" onClick={() => handleNavigation("/machine")}>Makineler</Button>
+            <Button color="inherit" onClick={() => handleNavigation("/project")}>Projeler</Button>
+            <Button color="inherit" onClick={() => handleNavigation("/task")}>İş Bölümleri</Button>
           </Toolbar>
         </AppBar>
       </Box>

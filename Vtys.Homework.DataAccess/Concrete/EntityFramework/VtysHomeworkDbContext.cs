@@ -46,6 +46,16 @@ namespace Vtys.Homework.DataAccess.Concrete.EntityFramework
 
         public DbSet<Entities.Concrete.TaskStatus> TaskStatuses { get; set; }
 
+        public DbSet<Page> Pages { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
+
+        public DbSet<PageRole> PageRoles { get; set; }
+
+        public DbSet<TaskStatusHistory> TaskStatusHistories { get; set; }
+
+        public DbSet<UserRole> UserRoles { get; set; }
+
 
     }
 }

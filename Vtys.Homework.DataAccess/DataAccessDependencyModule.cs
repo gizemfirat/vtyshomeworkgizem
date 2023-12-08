@@ -24,6 +24,12 @@ namespace Vtys.Homework.DataAccess
             UseEntityFramework<TaskSource>();
             UseEntityFramework<ProjectSource>();
             UseEntityFramework<Entities.Concrete.TaskStatus>();
+            UseEntityFramework<Page>();
+            UseEntityFramework<Role>();
+            UseEntityFramework<PageRole>();
+            UseEntityFramework<TaskStatusHistory>();
+            UseEntityFramework<UserRole>();
+            UseEntityFramework<Source>();
            // _services.AddSingleton<IEntityRepository<Employee>, MockEmployeeDal>();
         }
 

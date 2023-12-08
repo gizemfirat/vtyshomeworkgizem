@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Machine from "../types/entities/Machine";
 import { useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
-import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 
 const MachinePage = () => {
   const navigate = useNavigate();
@@ -39,6 +39,26 @@ const MachinePage = () => {
         </TableContainer>
       </Grid>
       <Grid md={3}></Grid>
+      <Grid md={2}></Grid>
+      <Grid md={7}>
+        <Grid container justifyContent={"flex-end"} marginTop={1} spacing={1}>
+          <Grid item >
+          <Button variant="contained" size="large">
+            Ekle
+          </Button>
+          </Grid>
+          <Grid item >
+          <Button variant="contained" size="large">
+            Sil
+          </Button>
+          </Grid>
+          <Grid item >
+          <Button variant="contained" size="large">
+            Güncelle
+          </Button>
+          </Grid>
+        </Grid>
+      </Grid>
     </Grid>
   );
 }
