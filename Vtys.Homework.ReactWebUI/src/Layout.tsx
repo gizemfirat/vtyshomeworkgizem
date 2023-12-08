@@ -19,8 +19,7 @@ const Layout = () => {
           </Toolbar>
         </AppBar>
       </Box>
-      <Grid md={4}>
-      </Grid>
+      <Grid md={4}></Grid>
       <Grid md={8}>
         <Outlet />
       </Grid>
