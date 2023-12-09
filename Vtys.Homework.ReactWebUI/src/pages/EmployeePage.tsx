@@ -24,7 +24,7 @@ const EmployeePage = () => {
           <Box padding={2}>
             <Grid container gap={1}>
               <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="employee table">
+                <Table sx={{ minWidth: 900 }} aria-label="employee table">
                   <TableHead>
                     <TableRow>
                       <TableCell align="right">ID</TableCell>
@@ -51,6 +51,16 @@ const EmployeePage = () => {
                             size="small"
                           >
                             Edit
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => {
+                              navigate(`/employees/detail?id=${employee.id}`);
+                            }}
+                            size="small"
+                          >
+                            Delete
                           </Button>
                         </TableCell>
                       </TableRow>
