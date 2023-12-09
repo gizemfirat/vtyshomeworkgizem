@@ -7,6 +7,8 @@ namespace Vtys.Homework.Business.Abstract
     public interface IEmployeeService : IService
     {
         IResult GetAll();
-        void Add(Employee employee);
+
+        IResult GetById(long id);
+        IResult Save(Employee employee);
     }
 }

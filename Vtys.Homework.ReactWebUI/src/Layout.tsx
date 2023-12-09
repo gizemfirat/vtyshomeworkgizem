@@ -16,17 +16,41 @@ const Layout = () => {
             <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
               G.E.
             </Typography>
-            <Button color="inherit" onClick={() => handleNavigation("/department")}>Departmanlar</Button>
-            <Button color="inherit" onClick={() => handleNavigation("/employee")}>Çalışanlar</Button>
-            <Button color="inherit" onClick={() => handleNavigation("/machine")}>Makineler</Button>
-            <Button color="inherit" onClick={() => handleNavigation("/project")}>Projeler</Button>
-            <Button color="inherit" onClick={() => handleNavigation("/task")}>İş Bölümleri</Button>
+            <Button
+              color="inherit"
+              onClick={() => handleNavigation("/department")}
+            >
+              Departmanlar
+            </Button>
+            <Button
+              color="inherit"
+              onClick={() => handleNavigation("/employee")}
+            >
+              Çalışanlar
+            </Button>
+            <Button
+              color="inherit"
+              onClick={() => handleNavigation("/machine")}
+            >
+              Makineler
+            </Button>
+            <Button
+              color="inherit"
+              onClick={() => handleNavigation("/project")}
+            >
+              Projeler
+            </Button>
+            <Button color="inherit" onClick={() => handleNavigation("/task")}>
+              İş Bölümleri
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
-      <Grid md={4}></Grid>
-      <Grid md={8}>
-        <Outlet />
+      <Grid marginTop={12}>
+        <Grid md={4}></Grid>
+        <Grid md={8}>
+          <Outlet />
+        </Grid>
       </Grid>
     </div>
   );

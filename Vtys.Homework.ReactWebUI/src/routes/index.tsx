@@ -7,6 +7,7 @@ import ProjectPage from "../pages/ProjectPage";
 import TaskPage from "../pages/TaskPage";
 import DepartmentPage from "../pages/DepartmentPage";
 import LoginPage from "../pages/LoginPage";
+import EmployeeDetailPage from "../pages/EmployeeDetailPage";
 
 const Routes = () => useRoutes([{
   path:"/",
@@ -19,7 +20,8 @@ const Routes = () => useRoutes([{
     {path: "project", element: <ProjectPage/>},
     {path: "task", element: <TaskPage/>},
     {path: "department", element: <DepartmentPage/>},
-    {path: "login", element: <LoginPage/>}
+    {path: "login", element: <LoginPage/>},
+    {path: "employees/detail", element: <EmployeeDetailPage/>}
   ]
 }]);
 

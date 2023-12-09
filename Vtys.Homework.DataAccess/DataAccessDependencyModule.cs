@@ -5,6 +5,9 @@ using Vtys.Homework.Entities.Concrete;
 using Vtys.Homework.DataAccess.Concrete.EntityFramework;
 using Vtys.Core.Entities;
 using Vtys.Homework.DataAccess.Concrete.Mock;
+using Vtys.Homework.DataAccess.Abstract.Queries;
+using Vtys.Homework.DataAccess.Concrete.EntityFramework.Queries;
+using Vtys.Homework.DataAccess.Concrete.Nhibernate.Queries;
 
 namespace Vtys.Homework.DataAccess
 {
@@ -30,12 +33,18 @@ namespace Vtys.Homework.DataAccess
             UseEntityFramework<TaskStatusHistory>();
             UseEntityFramework<UserRole>();
             UseEntityFramework<Source>();
-           // _services.AddSingleton<IEntityRepository<Employee>, MockEmployeeDal>();
+
+            ConfigureQueries();
         }
 
         private void UseEntityFramework<TEntity>() where TEntity : class, IEntity, new()
         {
             _services.AddSingleton<IEntityRepository<TEntity>, EfEntityRepositoryBase<TEntity, VtysHomeworkDbContext>>();
+        }
+
+        private void ConfigureQueries() 
+        {
+            _services.AddSingleton<IGetEmployeesQuery, NhGetEmployeesQuery>();
         }
     }
 }
