@@ -43,6 +43,7 @@ namespace Vtys.Homework.DataAccess
         private void ConfigureQueries() 
         {
             _services.AddSingleton<IGetEmployeesQuery, NpgsqlGetEmployeesQuery>();
+            _services.AddSingleton<IGetProjectsQuery, NpgsqlGetProjectsQuery>();
         }
     }
 }

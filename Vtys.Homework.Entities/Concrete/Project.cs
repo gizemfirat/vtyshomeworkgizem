@@ -15,8 +15,8 @@ namespace Vtys.Homework.Entities.Concrete
 
         public string Name { get; set; }
 
-        public DateOnly StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public DateOnly FinishDate { get; set; }
+        public DateTime FinishDate { get; set; }
     }
 }

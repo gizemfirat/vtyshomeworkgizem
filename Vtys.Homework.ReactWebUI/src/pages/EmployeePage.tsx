@@ -56,7 +56,9 @@ const EmployeePage = () => {
                         <TableCell align="right">
                           <Button
                             onClick={() => {
-                              navigate(`/employees/detail?id=${employee.id}`);
+                              apiHelper.delete<void>(`employees/${employee.id}`).then( () => {
+                                setEmployees(employees.filter(x => x.id !== employee.id))
+                              });
                             }}
                             size="small"
                           >
