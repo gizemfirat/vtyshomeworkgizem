@@ -14,5 +14,33 @@ namespace Vtys.Homework.Business.Concrete
             var users = Repository.GetList<User>();
             return new SuccessResult("", users);
         }
+
+        [ExceptionResultAspect]
+        public IResult GetById(long id)
+        {
+            var user = Repository.Get<User>(x => x.Id == id);
+            return new SuccessResult("", user);
+        }
+
+        [ExceptionResultAspect]
+        public IResult Save(User user)
+        {
+            user = user.Id == 0
+                ? Repository.Add(user)
+                : Repository.Update(user);
+
+            return new SuccessResult("", user);
+        }
+
+        [ExceptionResultAspect]
+        public IResult DeleteById(long id)
+        {
+            var user = Repository.Get<User>(x => x.Id == id);
+            if (user != null)
+            {
+                Repository.Delete(user);
+            }
+            return new SuccessResult("User deleted successfully!");
+        }
     }
 }

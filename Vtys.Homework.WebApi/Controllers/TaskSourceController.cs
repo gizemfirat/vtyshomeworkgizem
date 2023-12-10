@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Vtys.Core.ExtensionMethods;
 using Vtys.Homework.Business.Abstract;
+using Vtys.Homework.Entities.Concrete;
 
 namespace Vtys.Homework.WebApi.Controllers
 {
@@ -21,6 +22,42 @@ namespace Vtys.Homework.WebApi.Controllers
             {
                 ContentType = "application/json",
                 Content = _taskSourceService.GetAll().ToJson(),
+                StatusCode = 200,
+            };
+        }
+
+        [HttpGet]
+        [Route("api/taskSources/{id}")]
+        public IActionResult GetById(long id)
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _taskSourceService.GetById(id).ToJson(),
+                StatusCode = 200,
+            };
+        }
+
+        [HttpPost]
+        [Route("api/taskSources")]
+        public IActionResult Save([FromBody] TaskSource taskSource)
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _taskSourceService.Save(taskSource).ToJson(),
+                StatusCode = 200,
+            };
+        }
+
+        [HttpDelete]
+        [Route("api/taskSources/{id}")]
+        public IActionResult DeleteById(long id)
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _taskSourceService.DeleteById(id).ToJson(),
                 StatusCode = 200,
             };
         }

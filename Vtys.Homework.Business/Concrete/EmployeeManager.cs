@@ -39,5 +39,16 @@ namespace Vtys.Homework.Business.Concrete
 
             return new SuccessResult("", employee);
         }
+
+        [ExceptionResultAspect]
+        public IResult DeleteById(long id) 
+        {
+            var employee = Repository.Get<Employee>(x => x.Id == id);
+            if (employee != null)
+            {
+                Repository.Delete(employee);
+            }
+            return new SuccessResult("Employee deleted successfully!");
+        }
     }
 }

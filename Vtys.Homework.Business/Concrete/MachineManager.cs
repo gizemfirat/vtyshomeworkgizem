@@ -19,5 +19,33 @@ namespace Vtys.Homework.Business.Concrete
             var machines = Repository.GetList<Machine>();
             return new SuccessResult("", machines);
         }
+
+        [ExceptionResultAspect]
+        public IResult GetById(long id)
+        {
+            var machine = Repository.Get<Machine>(x => x.Id == id);
+            return new SuccessResult("", machine);
+        }
+
+        [ExceptionResultAspect]
+        public IResult Save(Machine machine)
+        {
+            machine = machine.Id == 0
+                ? Repository.Add(machine)
+                : Repository.Update(machine);
+
+            return new SuccessResult("", machine);
+        }
+
+        [ExceptionResultAspect]
+        public IResult DeleteById(long id)
+        {
+            var machine = Repository.Get<Machine>(x => x.Id == id);
+            if (machine != null)
+            {
+                Repository.Delete(machine);
+            }
+            return new SuccessResult("Machine deleted successfully!");
+        }
     }
 }

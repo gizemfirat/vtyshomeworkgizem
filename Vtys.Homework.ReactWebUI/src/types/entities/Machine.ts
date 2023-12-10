@@ -1,5 +1,6 @@
 type Machine = {
   id: number,
+  name: string,
   serialNumber: number
 }
 

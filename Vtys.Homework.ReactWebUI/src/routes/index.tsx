@@ -8,6 +8,8 @@ import TaskPage from "../pages/TaskPage";
 import DepartmentPage from "../pages/DepartmentPage";
 import LoginPage from "../pages/LoginPage";
 import EmployeeDetailPage from "../pages/EmployeeDetailPage";
+import DepartmentDetailPage from "../pages/DepartmentDetailPage";
+import MachineDetailPage from "../pages/MachineDetailPage";
 
 const Routes = () => useRoutes([{
   path:"/",
@@ -21,7 +23,9 @@ const Routes = () => useRoutes([{
     {path: "task", element: <TaskPage/>},
     {path: "department", element: <DepartmentPage/>},
     {path: "login", element: <LoginPage/>},
-    {path: "employees/detail", element: <EmployeeDetailPage/>}
+    {path: "employees/detail", element: <EmployeeDetailPage/>},
+    {path: "departments/detail", element: <DepartmentDetailPage/>},
+    {path: "machines/detail", element: <MachineDetailPage/>}
   ]
 }]);
 

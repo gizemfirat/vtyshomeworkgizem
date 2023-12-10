@@ -18,8 +18,14 @@ const EmployeeDetailPage = () => {
 
   const handleSubmit = () => {
     if (employee) {
-      //employee.id = 0;
-      apiHelper.post<Employee, Employee>("employees", employee).then(() => {});
+      if (employee.id) {
+        apiHelper.post<Employee, Employee>(`employees`, employee)
+          .then(() => {})
+      } else {
+        apiHelper.post<Employee, Employee>('employees', employee)
+          .then(() => {
+          })
+      }
     }
   };
 

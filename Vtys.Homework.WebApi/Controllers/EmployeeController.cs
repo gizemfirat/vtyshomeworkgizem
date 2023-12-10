@@ -49,5 +49,17 @@ namespace Vtys.Homework.WebApi.Controllers
                 StatusCode = 200,
             };
         }
+
+        [HttpDelete]
+        [Route("api/employees/{id}")]
+        public IActionResult DeleteById(long id) 
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _employeeService.DeleteById(id).ToJson(),
+                StatusCode = 200,
+            };
+        }
     }
 }

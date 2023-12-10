@@ -50,7 +50,7 @@ const EmployeePage = () => {
                             }}
                             size="small"
                           >
-                            Edit
+                            Düzenle
                           </Button>
                         </TableCell>
                         <TableCell align="right">
@@ -60,7 +60,7 @@ const EmployeePage = () => {
                             }}
                             size="small"
                           >
-                            Delete
+                            Sil
                           </Button>
                         </TableCell>
                       </TableRow>
@@ -75,21 +75,8 @@ const EmployeePage = () => {
                     <Button
                       variant="contained"
                       size="large"
-                      onClick={() => {
-                        navigate(`/employees/detail`);
-                      }}
                     >
                       Ekle
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="contained" size="large">
-                      Sil
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="contained" size="large">
-                      Güncelle
                     </Button>
                   </Grid>
                 </Grid>

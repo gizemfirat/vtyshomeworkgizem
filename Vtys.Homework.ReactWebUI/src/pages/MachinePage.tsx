@@ -37,6 +37,26 @@ const MachinePage = () => {
                         <TableCell align="right">
                           {machine.serialNumber}
                         </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => {
+                              navigate(`/machines/detail?id=${machine.id}`);
+                            }}
+                            size="small"
+                          >
+                            Düzenle
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => {
+                              navigate(`/machines/detail?id=${machine.id}`);
+                            }}
+                            size="small"
+                          >
+                            Sil
+                          </Button>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -46,18 +66,14 @@ const MachinePage = () => {
               <Grid md={12}>
                 <Grid container justifyContent={"flex-end"} spacing={1}>
                   <Grid item>
-                    <Button variant="contained" size="large">
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/machines/detail`);
+                      }}
+                    >
                       Ekle
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="contained" size="large">
-                      Sil
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="contained" size="large">
-                      Güncelle
                     </Button>
                   </Grid>
                 </Grid>

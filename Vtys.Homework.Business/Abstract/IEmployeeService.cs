@@ -10,5 +10,7 @@ namespace Vtys.Homework.Business.Abstract
 
         IResult GetById(long id);
         IResult Save(Employee employee);
+
+        IResult DeleteById(long id);
     }
 }

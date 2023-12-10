@@ -19,5 +19,33 @@ namespace Vtys.Homework.Business.Concrete
             var taskStatus = Repository.GetList<Entities.Concrete.TaskStatus>();
             return new SuccessResult("", taskStatus);
         }
+
+        [ExceptionResultAspect]
+        public IResult GetById(long id)
+        {
+            var taskSatus = Repository.Get<Entities.Concrete.TaskStatus>(x => x.Id == id);
+            return new SuccessResult("", taskSatus);
+        }
+
+        [ExceptionResultAspect]
+        public IResult Save(Entities.Concrete.TaskStatus taskStatus)
+        {
+            taskStatus = taskStatus.Id == 0
+                ? Repository.Add(taskStatus)
+                : Repository.Update(taskStatus);
+
+            return new SuccessResult("", taskStatus);
+        }
+
+        [ExceptionResultAspect]
+        public IResult DeleteById(long id)
+        {
+            var taskStatus = Repository.Get<Entities.Concrete.TaskStatus>(x => x.Id == id);
+            if (taskStatus != null)
+            {
+                Repository.Delete(taskStatus);
+            }
+            return new SuccessResult("Task Status deleted successfully!");
+        }
     }
 }
