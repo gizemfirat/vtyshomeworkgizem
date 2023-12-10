@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
-import Employee from "../types/entities/Employee";
 import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import EmployeeDetail from "../types/models/EmployeeDetail";
 
 const EmployeePage = () => {
   const navigate = useNavigate();
 
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employees, setEmployees] = useState<EmployeeDetail[]>([]);
   const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
-    apiHelper.get<Employee[]>("employees").then((data) => {
+    apiHelper.get<EmployeeDetail[]>("employees").then((data) => {
       setEmployees(data);
     })
   }, [])
@@ -30,7 +30,7 @@ const EmployeePage = () => {
                       <TableCell align="right">ID</TableCell>
                       <TableCell align="right">Ad</TableCell>
                       <TableCell align="right">Soyad</TableCell>
-                      <TableCell align="right">Departman ID'si</TableCell>
+                      <TableCell align="right">Departman</TableCell>
                       <TableCell align="right"></TableCell>
                     </TableRow>
                   </TableHead>
@@ -41,7 +41,7 @@ const EmployeePage = () => {
                         <TableCell align="right">{employee.name}</TableCell>
                         <TableCell align="right">{employee.surname}</TableCell>
                         <TableCell align="right">
-                          {employee.departmentId}
+                          {employee.departmentName}
                         </TableCell>
                         <TableCell align="right">
                           <Button

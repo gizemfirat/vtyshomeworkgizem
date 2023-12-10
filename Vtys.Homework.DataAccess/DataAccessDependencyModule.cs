@@ -4,10 +4,8 @@ using Vtys.Core.DataAccess;
 using Vtys.Homework.Entities.Concrete;
 using Vtys.Homework.DataAccess.Concrete.EntityFramework;
 using Vtys.Core.Entities;
-using Vtys.Homework.DataAccess.Concrete.Mock;
 using Vtys.Homework.DataAccess.Abstract.Queries;
-using Vtys.Homework.DataAccess.Concrete.EntityFramework.Queries;
-using Vtys.Homework.DataAccess.Concrete.Nhibernate.Queries;
+using Vtys.Homework.DataAccess.Concrete.Npgsql;
 
 namespace Vtys.Homework.DataAccess
 {
@@ -44,7 +42,7 @@ namespace Vtys.Homework.DataAccess
 
         private void ConfigureQueries() 
         {
-            _services.AddSingleton<IGetEmployeesQuery, NhGetEmployeesQuery>();
+            _services.AddSingleton<IGetEmployeesQuery, NpgsqlGetEmployeesQuery>();
         }
     }
 }
