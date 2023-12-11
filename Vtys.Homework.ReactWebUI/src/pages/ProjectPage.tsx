@@ -56,6 +56,13 @@ const ProjectPage = () => {
                     </Button>
                   </Grid>
                   <Grid item>
+                    <Button variant="contained" size="large"  onClick={() => {
+                              navigate(`/projects/detail`);
+                            }}>
+                      Detayları Gör
+                    </Button>
+                  </Grid>
+                  <Grid item>
                     <Button variant="contained" size="large">
                       Sil
                     </Button>

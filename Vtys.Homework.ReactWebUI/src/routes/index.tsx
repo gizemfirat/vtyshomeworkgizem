@@ -10,6 +10,7 @@ import LoginPage from "../pages/LoginPage";
 import EmployeeDetailPage from "../pages/EmployeeDetailPage";
 import DepartmentDetailPage from "../pages/DepartmentDetailPage";
 import MachineDetailPage from "../pages/MachineDetailPage";
+import ProjectsDetailPage from "../pages/ProjectsDetailPage";
 
 const Routes = () => useRoutes([{
   path:"/",
@@ -25,7 +26,8 @@ const Routes = () => useRoutes([{
     {path: "login", element: <LoginPage/>},
     {path: "employees/detail", element: <EmployeeDetailPage/>},
     {path: "departments/detail", element: <DepartmentDetailPage/>},
-    {path: "machines/detail", element: <MachineDetailPage/>}
+    {path: "machines/detail", element: <MachineDetailPage/>},
+    {path: "projects/detail", element: <ProjectsDetailPage/>}
   ]
 }]);
 
