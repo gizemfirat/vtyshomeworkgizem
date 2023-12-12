@@ -32,6 +32,7 @@ const EmployeePage = () => {
                       <TableCell align="right">Soyad</TableCell>
                       <TableCell align="right">Departman</TableCell>
                       <TableCell align="right"></TableCell>
+                      <TableCell align="right"></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -77,6 +78,9 @@ const EmployeePage = () => {
                     <Button
                       variant="contained"
                       size="large"
+                      onClick={() => {
+                        navigate(`/employees/detail`);
+                      }}
                     >
                       Ekle
                     </Button>

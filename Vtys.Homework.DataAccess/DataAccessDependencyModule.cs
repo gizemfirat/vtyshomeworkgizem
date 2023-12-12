@@ -44,6 +44,7 @@ namespace Vtys.Homework.DataAccess
         {
             _services.AddSingleton<IGetEmployeesQuery, NpgsqlGetEmployeesQuery>();
             _services.AddSingleton<IGetProjectsQuery, NpgsqlGetProjectsQuery>();
+            _services.AddSingleton<IGetProjectSourcesQuery, NpgsqlGetProjectSourcesQuery>();
         }
     }
 }

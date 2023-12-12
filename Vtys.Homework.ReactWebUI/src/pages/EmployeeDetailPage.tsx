@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
 import Employee from "../types/entities/Employee";
-import { Box, Button, Grid, Paper, TextField } from "@mui/material";
+import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import Department from "../types/entities/Department";
 
 
@@ -59,6 +59,7 @@ const EmployeeDetailPage = () => {
             <Box padding={2}>
               <Grid container gap={2}>
                 <Grid md={12}>
+                  <Typography fontWeight={500}>Çalışan Adı:</Typography>
                   <TextField
                     value={employee?.name}
                     onChange={(e) => {
@@ -68,6 +69,7 @@ const EmployeeDetailPage = () => {
                   />
                 </Grid>
                 <Grid md={12}>
+                  <Typography fontWeight={500}>Çalışan Soyadı:</Typography>
                   <TextField
                     value={employee?.surname}
                     onChange={(e) => {
@@ -78,7 +80,10 @@ const EmployeeDetailPage = () => {
                 </Grid>
                 <Grid md={12}>
                   <label htmlFor="departmentSelect">Departman Seç:</label>
-                  <select id="departmentSelect" onChange={handleDepartmentChange}>
+                  <select
+                    id="departmentSelect"
+                    onChange={handleDepartmentChange}
+                  >
                     {departments.map((department) => (
                       <option key={department.id} value={department.id}>
                         {department.name}
@@ -90,7 +95,9 @@ const EmployeeDetailPage = () => {
                   <Grid container justifyContent={"space-between"}>
                     <Grid item></Grid>
                     <Grid item>
-                      <Button onClick={handleSubmit}>Kaydet</Button>
+                      <Button variant="contained" onClick={handleSubmit}>
+                        Kaydet
+                      </Button>
                     </Grid>
                   </Grid>
                 </Grid>

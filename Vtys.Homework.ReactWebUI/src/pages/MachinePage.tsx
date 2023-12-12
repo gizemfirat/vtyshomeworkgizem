@@ -27,13 +27,17 @@ const MachinePage = () => {
                   <TableHead>
                     <TableRow>
                       <TableCell align="right">ID</TableCell>
+                      <TableCell align="right">Makine Adı</TableCell>
                       <TableCell align="right">Seri Numarası</TableCell>
+                      <TableCell align="right"></TableCell>
+                      <TableCell align="right"></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {machines.map((machine) => (
                       <TableRow key={machine.id}>
                         <TableCell align="right">{machine.id}</TableCell>
+                        <TableCell align="right">{machine.name}</TableCell>
                         <TableCell align="right">
                           {machine.serialNumber}
                         </TableCell>
@@ -49,9 +53,11 @@ const MachinePage = () => {
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => {
-                              navigate(`/machines/detail?id=${machine.id}`);
-                            }}
+                           onClick={() => {
+                            apiHelper.delete<void>(`machines/${machine.id}`).then( () => {
+                              setMachines(machines.filter(x => x.id !== machine.id))
+                            });
+                          }}
                             size="small"
                           >
                             Sil
