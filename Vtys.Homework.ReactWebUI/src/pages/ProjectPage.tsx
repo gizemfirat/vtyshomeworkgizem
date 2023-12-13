@@ -31,6 +31,9 @@ const ProjectPage = () => {
                       <TableCell align="right">Proje Adı</TableCell>
                       <TableCell align="right">Başlangıç Tarihi</TableCell>
                       <TableCell align="right">Bitiş Tarihi</TableCell>
+                      <TableCell align="right">Müşteri ID'si</TableCell>
+                      <TableCell align="right">Proje Tipi</TableCell>
+                      <TableCell align="right">Son Durum</TableCell>
                       <TableCell align="right"></TableCell>
                       <TableCell align="right"></TableCell>
                     </TableRow>
@@ -44,6 +47,16 @@ const ProjectPage = () => {
                         <TableCell align="right">
                           {project.finishDate}
                         </TableCell>
+                        <TableCell align="right">
+                          {project.customerId}
+                        </TableCell>
+                        <TableCell align="right">
+                          {project.projectTypeId}
+                        </TableCell>
+                        <TableCell align="right">
+                          {project.lastStatusId}
+                        </TableCell>
+
                         <TableCell align="right">
                           <Button
                             onClick={() => {
@@ -81,6 +94,28 @@ const ProjectPage = () => {
                   <Grid item>
                     <Button variant="contained" size="large">
                       Ekle
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/customer`);
+                      }}
+                    >
+                      Müşteriler
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/projectType`);
+                      }}
+                    >
+                      Proje Tipleri
                     </Button>
                   </Grid>
                   <Grid item>

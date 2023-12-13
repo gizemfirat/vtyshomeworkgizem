@@ -31,6 +31,11 @@ namespace Vtys.Homework.DataAccess
             UseEntityFramework<TaskStatusHistory>();
             UseEntityFramework<UserRole>();
             UseEntityFramework<Source>();
+            UseEntityFramework<Customer>();
+            UseEntityFramework<ProjectStatus>();
+            UseEntityFramework<ProjectStatusHistory>();
+            UseEntityFramework<ProjectType>();
+            UseEntityFramework<TaskType>();
 
             ConfigureQueries();
         }

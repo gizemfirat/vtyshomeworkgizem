@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
 import Employee from "../types/entities/Employee";
-import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, Grid, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 import Department from "../types/entities/Department";
 
 
 const EmployeeDetailPage = () => {
   const navigate = useNavigate();
-  const [employee, setEmployee] = useState<Employee>();
+  const [employee, setEmployee] = useState<Employee>({id: 0, name: "", surname: "", departmentId: 0});
   const [departments, setDepartments] = useState<Department[]>([]);
 
   const location = useLocation();
@@ -26,15 +26,6 @@ const EmployeeDetailPage = () => {
           .then(() => {
           })
       }
-    }
-  };
-
-  const handleDepartmentChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedDepartmentId = parseInt(event.target.value);
-    const selectedDepartment = departments.find(department => department.id === selectedDepartmentId);
-
-    if (selectedDepartment && employee) {
-      setEmployee({ ...employee, departmentId: selectedDepartmentId});
     }
   };
 
@@ -59,8 +50,9 @@ const EmployeeDetailPage = () => {
             <Box padding={2}>
               <Grid container gap={2}>
                 <Grid md={12}>
-                  <Typography fontWeight={500}>Çalışan Adı:</Typography>
                   <TextField
+                    fullWidth
+                    label={"Ad"}
                     value={employee?.name}
                     onChange={(e) => {
                       if (employee)
@@ -69,8 +61,9 @@ const EmployeeDetailPage = () => {
                   />
                 </Grid>
                 <Grid md={12}>
-                  <Typography fontWeight={500}>Çalışan Soyadı:</Typography>
                   <TextField
+                    label={"Soyad"}
+                    fullWidth
                     value={employee?.surname}
                     onChange={(e) => {
                       if (employee)
@@ -79,17 +72,24 @@ const EmployeeDetailPage = () => {
                   />
                 </Grid>
                 <Grid md={12}>
-                  <label htmlFor="departmentSelect">Departman Seç:</label>
-                  <select
-                    id="departmentSelect"
-                    onChange={handleDepartmentChange}
+                  <Select
+                    fullWidth
+                    value={employee.departmentId}
+                    label={"Departman"}
+                    onChange={(e) => {
+                      if (employee)
+                        setEmployee({
+                          ...employee,
+                          departmentId: e.target.value as number,
+                        });
+                    }}
                   >
                     {departments.map((department) => (
-                      <option key={department.id} value={department.id}>
+                      <MenuItem key={department.id} value={department.id}>
                         {department.name}
-                      </option>
+                      </MenuItem>
                     ))}
-                  </select>
+                  </Select>
                 </Grid>
                 <Grid md={12}>
                   <Grid container justifyContent={"space-between"}>

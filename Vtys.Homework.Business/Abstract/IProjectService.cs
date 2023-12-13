@@ -12,5 +12,6 @@ namespace Vtys.Homework.Business.Abstract
         IResult DeleteById(long id);
 
         IResult GetAllWithDetail();
+        IResult GetSources(long projectId);
     }
 }

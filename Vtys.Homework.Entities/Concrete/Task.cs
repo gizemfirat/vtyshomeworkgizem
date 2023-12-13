@@ -14,6 +14,7 @@ namespace Vtys.Homework.Entities.Concrete
         public long Id { get; set; }
 
         public string Name { get; set; }
+        public long TaskTypeId { get; set; }
 
         public long ProjectId { get; set; }
 

@@ -29,7 +29,8 @@ const TaskPage = () => {
                       <TableCell align="right">ID</TableCell>
                       <TableCell align="right">İş Adı</TableCell>
                       <TableCell align="right">Proje ID'si</TableCell>
-                      <TableCell align="right">İş Durumu ID'si</TableCell>
+                      <TableCell align="right">İş Tipi</TableCell>
+                      <TableCell align="right">Son Durum</TableCell>
                       <TableCell align="right"></TableCell>
                       <TableCell align="right"></TableCell>
                     </TableRow>
@@ -40,6 +41,7 @@ const TaskPage = () => {
                         <TableCell align="right">{task.id}</TableCell>
                         <TableCell align="right">{task.name}</TableCell>
                         <TableCell align="right">{task.projectId}</TableCell>
+                        <TableCell align="right">{task.taskTypeId}</TableCell>
                         <TableCell align="right">{task.lastStatusId}</TableCell>
                         <TableCell align="right">
                           <Button
@@ -84,6 +86,17 @@ const TaskPage = () => {
                       }}
                     >
                       Ekle
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/taskType`);
+                      }}
+                    >
+                      İş Tipleri
                     </Button>
                   </Grid>
                 </Grid>

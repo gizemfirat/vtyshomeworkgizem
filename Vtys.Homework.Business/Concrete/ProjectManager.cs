@@ -57,5 +57,14 @@ namespace Vtys.Homework.Business.Concrete
             var projects = _getProjectsQuery.Run();
             return new SuccessResult("", projects);
         }
+
+        [ExceptionResultAspect]
+        public IResult GetSources(long projectId)
+        {
+            var projectSources = Repository.GetList<ProjectSource>(x => x.ProjectId == projectId);
+            var sourceIds = projectSources.Select(x => x.SourceId);
+            var sources = Repository.GetList<Source>(x => sourceIds.Contains(x.Id));
+            return new SuccessResult("", sources);
+        }
     }
 }
