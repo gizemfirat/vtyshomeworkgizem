@@ -18,8 +18,7 @@ namespace Vtys.Homework.Business.Concrete
         [ExceptionResultAspect]
         public IResult GetAll()
         {
-            _getEmployeesQuery.Run();
-            var employees = Repository.GetList<Employee>();
+            var employees = _getEmployeesQuery.Run();
             return new SuccessResult("", employees);
         }
 

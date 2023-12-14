@@ -29,6 +29,8 @@ const DepartmentPage = () => {
                     <TableRow>
                       <TableCell align="right">ID</TableCell>
                       <TableCell align="right">Departman Adı</TableCell>
+                      <TableCell align="right"></TableCell>
+                      <TableCell align="right"></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -50,11 +52,11 @@ const DepartmentPage = () => {
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => {
-                              navigate(
-                                `/departments/detail?id=${department.id}`
-                              );
-                            }}
+                           onClick={() => {
+                            apiHelper.delete<void>(`departments/${department.id}`).then( () => {
+                              setDepartments(departments.filter(x => x.id !== department.id))
+                            });
+                          }}
                             size="small"
                           >
                             Sil

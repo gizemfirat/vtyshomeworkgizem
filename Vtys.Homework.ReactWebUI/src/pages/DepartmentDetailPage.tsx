@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
-import { Box, Button, Grid, Paper, TextField } from "@mui/material";
+import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import Department from "../types/entities/Department";
 
 
 const DepartmentDetailPage = () => {
   const navigate = useNavigate();
-  const [department, setDepartment] = useState<Department>();
+  const [department, setDepartment] = useState<Department>({id: 0, name: ""});
 
 
   const location = useLocation();
@@ -44,6 +44,7 @@ const DepartmentDetailPage = () => {
               <Grid container gap={2}>
                 <Grid md={12}>
                   <TextField
+                    label={"Ad"}
                     value={department?.name}
                     onChange={(e) => {
                       if (department)
@@ -55,7 +56,9 @@ const DepartmentDetailPage = () => {
                   <Grid container justifyContent={"space-between"}>
                     <Grid item></Grid>
                     <Grid item>
-                      <Button onClick={handleSubmit}>Kaydet</Button>
+                      <Button variant="contained" onClick={handleSubmit}>
+                        Kaydet
+                      </Button>
                     </Grid>
                   </Grid>
                 </Grid>

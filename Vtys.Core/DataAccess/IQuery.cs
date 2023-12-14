@@ -9,6 +9,6 @@ namespace Vtys.Core.DataAccess
 {
     public interface IQuery<T> where T : class, new()
     {
-        T Run(object? args = null);
+        List<T> Run(params object[] parameters);
     }
 }

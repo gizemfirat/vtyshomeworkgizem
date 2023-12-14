@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
-import { Box, Button, Grid, Paper, TextField } from "@mui/material";
+import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import Machine from "../types/entities/Machine";
 
 
 const MachineDetailPage = () => {
   const navigate = useNavigate();
-  const [machine, setMachine] = useState<Machine>();
+  const [machine, setMachine] = useState<Machine>({id: 0, name: "", serialNumber: 0});
 
 
   const location = useLocation();
@@ -44,6 +44,7 @@ const MachineDetailPage = () => {
               <Grid container gap={2}>
                 <Grid md={12}>
                   <TextField
+                    label={"Ad"}
                     value={machine?.name}
                     onChange={(e) => {
                       if (machine)
@@ -53,11 +54,15 @@ const MachineDetailPage = () => {
                 </Grid>
                 <Grid md={12}>
                   <TextField
-                  type="number"
+                    label={"Seri Numarası"}
+                    type=""
                     value={machine?.serialNumber}
                     onChange={(e) => {
                       if (machine)
-                        setMachine({ ...machine, serialNumber: parseInt(e.target.value)});
+                        setMachine({
+                          ...machine,
+                          serialNumber: parseInt(e.target.value),
+                        });
                     }}
                   />
                 </Grid>
@@ -65,7 +70,9 @@ const MachineDetailPage = () => {
                   <Grid container justifyContent={"space-between"}>
                     <Grid item></Grid>
                     <Grid item>
-                      <Button onClick={handleSubmit}>Kaydet</Button>
+                      <Button variant="contained" onClick={handleSubmit}>
+                        Kaydet
+                      </Button>
                     </Grid>
                   </Grid>
                 </Grid>

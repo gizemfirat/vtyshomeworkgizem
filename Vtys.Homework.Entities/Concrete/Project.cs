@@ -14,9 +14,12 @@ namespace Vtys.Homework.Entities.Concrete
         public long Id { get; set; }
 
         public string Name { get; set; }
+        public long CustomerId { get; set; }
+        public long ProjectTypeId { get; set; }
+        public long LastStatusId { get; set; }
 
-        public DateOnly StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
-        public DateOnly FinishDate { get; set; }
+        public DateTime FinishDate { get; set; }
     }
 }

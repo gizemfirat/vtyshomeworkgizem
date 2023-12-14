@@ -10,5 +10,8 @@ namespace Vtys.Homework.Business.Abstract
         IResult GetById(long id);
         IResult Save(Project project);
         IResult DeleteById(long id);
+
+        IResult GetAllWithDetail();
+        IResult GetSources(long projectId);
     }
 }

@@ -61,5 +61,29 @@ namespace Vtys.Homework.WebApi.Controllers
                 StatusCode = 200,
             };
         }
+
+        [HttpGet]
+        [Route("api/projects/detail")]
+        public IActionResult GetAllWithDetail()
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _projectService.GetAllWithDetail().ToJson(),
+                StatusCode = 200,
+            };
+        }
+
+        [HttpGet]
+        [Route("api/projects/{projectId}/projectSources")]
+        public IActionResult GetAllWithDetail(long projectId)
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _projectService.GetSources(projectId).ToJson(),
+                StatusCode = 200,
+            };
+        }
     }
 }

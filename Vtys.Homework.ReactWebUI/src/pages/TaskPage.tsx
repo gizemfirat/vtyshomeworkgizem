@@ -29,7 +29,10 @@ const TaskPage = () => {
                       <TableCell align="right">ID</TableCell>
                       <TableCell align="right">İş Adı</TableCell>
                       <TableCell align="right">Proje ID'si</TableCell>
-                      <TableCell align="right">İş Durumu ID'si</TableCell>
+                      <TableCell align="right">İş Tipi</TableCell>
+                      <TableCell align="right">Son Durum</TableCell>
+                      <TableCell align="right"></TableCell>
+                      <TableCell align="right"></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -38,7 +41,34 @@ const TaskPage = () => {
                         <TableCell align="right">{task.id}</TableCell>
                         <TableCell align="right">{task.name}</TableCell>
                         <TableCell align="right">{task.projectId}</TableCell>
+                        <TableCell align="right">{task.taskTypeId}</TableCell>
                         <TableCell align="right">{task.lastStatusId}</TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => {
+                              navigate(`/tasks/detail?id=${task.id}`);
+                            }}
+                            size="small"
+                          >
+                            Düzenle
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => {
+                              apiHelper
+                                .delete<void>(`tasks/${task.id}`)
+                                .then(() => {
+                                  setTasks(
+                                    tasks.filter((x) => x.id !== task.id)
+                                  );
+                                });
+                            }}
+                            size="small"
+                          >
+                            Sil
+                          </Button>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -48,18 +78,25 @@ const TaskPage = () => {
               <Grid md={12}>
                 <Grid container justifyContent={"flex-end"} spacing={1}>
                   <Grid item>
-                    <Button variant="contained" size="large">
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/tasks/detail`);
+                      }}
+                    >
                       Ekle
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="contained" size="large">
-                      Sil
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="contained" size="large">
-                      Güncelle
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/taskType`);
+                      }}
+                    >
+                      İş Tipleri
                     </Button>
                   </Grid>
                 </Grid>

@@ -10,8 +10,4 @@
     <ProjectReference Include="..\Vtys.Core\Vtys.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ComplexTypes\" />
-  </ItemGroup>
-
 </Project>

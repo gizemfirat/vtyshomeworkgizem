@@ -4,10 +4,8 @@ using Vtys.Core.DataAccess;
 using Vtys.Homework.Entities.Concrete;
 using Vtys.Homework.DataAccess.Concrete.EntityFramework;
 using Vtys.Core.Entities;
-using Vtys.Homework.DataAccess.Concrete.Mock;
 using Vtys.Homework.DataAccess.Abstract.Queries;
-using Vtys.Homework.DataAccess.Concrete.EntityFramework.Queries;
-using Vtys.Homework.DataAccess.Concrete.Nhibernate.Queries;
+using Vtys.Homework.DataAccess.Concrete.Npgsql;
 
 namespace Vtys.Homework.DataAccess
 {
@@ -33,6 +31,11 @@ namespace Vtys.Homework.DataAccess
             UseEntityFramework<TaskStatusHistory>();
             UseEntityFramework<UserRole>();
             UseEntityFramework<Source>();
+            UseEntityFramework<Customer>();
+            UseEntityFramework<ProjectStatus>();
+            UseEntityFramework<ProjectStatusHistory>();
+            UseEntityFramework<ProjectType>();
+            UseEntityFramework<TaskType>();
 
             ConfigureQueries();
         }
@@ -44,7 +47,9 @@ namespace Vtys.Homework.DataAccess
 
         private void ConfigureQueries() 
         {
-            _services.AddSingleton<IGetEmployeesQuery, NhGetEmployeesQuery>();
+            _services.AddSingleton<IGetEmployeesQuery, NpgsqlGetEmployeesQuery>();
+            _services.AddSingleton<IGetProjectsQuery, NpgsqlGetProjectsQuery>();
+            _services.AddSingleton<IGetProjectSourcesQuery, NpgsqlGetProjectSourcesQuery>();
         }
     }
 }

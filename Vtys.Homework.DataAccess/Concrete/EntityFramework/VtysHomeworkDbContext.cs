@@ -56,6 +56,15 @@ namespace Vtys.Homework.DataAccess.Concrete.EntityFramework
 
         public DbSet<UserRole> UserRoles { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<ProjectStatus> ProjectStatuses { get; set; }
+
+        public DbSet<ProjectStatusHistory> ProjectStatusHistories { get; set; }
+
+        public DbSet<ProjectType> ProjectTypes { get; set; }
+        public DbSet<TaskType> TaskTypes { get; set; }
+
 
     }
 }

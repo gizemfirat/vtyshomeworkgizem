@@ -31,6 +31,11 @@ const ProjectPage = () => {
                       <TableCell align="right">Proje Adı</TableCell>
                       <TableCell align="right">Başlangıç Tarihi</TableCell>
                       <TableCell align="right">Bitiş Tarihi</TableCell>
+                      <TableCell align="right">Müşteri ID'si</TableCell>
+                      <TableCell align="right">Proje Tipi</TableCell>
+                      <TableCell align="right">Son Durum</TableCell>
+                      <TableCell align="right"></TableCell>
+                      <TableCell align="right"></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -42,6 +47,42 @@ const ProjectPage = () => {
                         <TableCell align="right">
                           {project.finishDate}
                         </TableCell>
+                        <TableCell align="right">
+                          {project.customerId}
+                        </TableCell>
+                        <TableCell align="right">
+                          {project.projectTypeId}
+                        </TableCell>
+                        <TableCell align="right">
+                          {project.lastStatusId}
+                        </TableCell>
+
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => {
+                              navigate(`/project/detail?id=${project.id}`);
+                            }}
+                            size="small"
+                          >
+                            Düzenle
+                          </Button>
+                        </TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => {
+                              apiHelper
+                                .delete<void>(`projects/${project.id}`)
+                                .then(() => {
+                                  setProjects(
+                                    projects.filter((x) => x.id !== project.id)
+                                  );
+                                });
+                            }}
+                            size="small"
+                          >
+                            Sil
+                          </Button>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -50,19 +91,48 @@ const ProjectPage = () => {
               <Grid md={2}></Grid>
               <Grid md={12}>
                 <Grid container justifyContent={"flex-end"} spacing={1}>
-                  <Grid item>
-                    <Button variant="contained" size="large">
+                <Grid item>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/project/detail`);
+                      }}
+                    >
                       Ekle
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="contained" size="large">
-                      Sil
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/customer`);
+                      }}
+                    >
+                      Müşteriler
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="contained" size="large">
-                      Güncelle
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/projectType`);
+                      }}
+                    >
+                      Proje Tipleri
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/projects/detail`);
+                      }}
+                    >
+                      Detayları Gör
                     </Button>
                   </Grid>
                 </Grid>
