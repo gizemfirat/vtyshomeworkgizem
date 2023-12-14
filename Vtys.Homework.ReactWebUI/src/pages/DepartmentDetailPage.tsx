@@ -7,7 +7,7 @@ import Department from "../types/entities/Department";
 
 const DepartmentDetailPage = () => {
   const navigate = useNavigate();
-  const [department, setDepartment] = useState<Department>();
+  const [department, setDepartment] = useState<Department>({id: 0, name: ""});
 
 
   const location = useLocation();
@@ -43,8 +43,8 @@ const DepartmentDetailPage = () => {
             <Box padding={2}>
               <Grid container gap={2}>
                 <Grid md={12}>
-                  <Typography fontWeight={500}>Departman Adı:</Typography>
                   <TextField
+                    label={"Ad"}
                     value={department?.name}
                     onChange={(e) => {
                       if (department)

@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
-import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
-import Task from "../types/entities/Task";
+import Employee from "../types/entities/Employee";
+import { Box, Button, Grid, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 import Project from "../types/entities/Project";
+import Task from "../types/entities/Task";
 import TaskStatus from "../types/entities/TaskStatus";
+import TaskType from "../types/entities/TaskType";
 
 
 const TaskDetailPage = () => {
   const navigate = useNavigate();
-  const [task, setTask] = useState<Task>();
+  const [task, setTask] = useState<Task>({id: 0, name: "", lastStatusId: 0, taskTypeId: 0, projectId: 0});
   const [projects, setProjects] = useState<Project[]>([]);
   const [taskStatuses, setTaskStatuses] = useState<TaskStatus[]>([]);
-
+  const [taskTypes, setTaskTypes] = useState<TaskType[]>([]);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -29,24 +31,6 @@ const TaskDetailPage = () => {
           .then(() => {
           })
       }
-    }
-  };
-
-  const handleProjectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedProjectId = parseInt(event.target.value);
-    const selectedProject = projects.find(project => project.id === selectedProjectId);
-
-    if (selectedProject && task) {
-      setTask({ ...task, projectId: selectedProjectId});
-    }
-  };
-
-  const handleTaskStatusChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedTaskStatusId = parseInt(event.target.value);
-    const selectedTaskStatus = taskStatuses.find(taskStatus => taskStatus.id === selectedTaskStatusId);
-
-    if (selectedTaskStatus && task) {
-      setTask({ ...task, lastStatusId: selectedTaskStatusId});
     }
   };
 
@@ -68,6 +52,12 @@ const TaskDetailPage = () => {
     })
   }, [])
 
+  useEffect(() => {
+    apiHelper.get<TaskType[]>("taskTypes").then((data) => {
+      setTaskTypes(data);
+    })
+  }, [])
+
   return (
     <div>
       <Grid marginTop={12} container>
@@ -77,36 +67,75 @@ const TaskDetailPage = () => {
             <Box padding={2}>
               <Grid container gap={2}>
                 <Grid md={12}>
-                  <Typography fontWeight={500}>İşin Adı:</Typography>
                   <TextField
+                    fullWidth
+                    label={"Ad"}
                     value={task?.name}
                     onChange={(e) => {
-                      if (task) setTask({ ...task, name: e.target.value });
+                      if (task)
+                        setTask({ ...task, name: e.target.value });
                     }}
                   />
                 </Grid>
                 <Grid md={12}>
-                  <label htmlFor="projectSelect">Proje Seç:</label>
-                  <select id="projectSelect" onChange={handleProjectChange}>
+                  <Select
+                    fullWidth
+                    value={task.projectId}
+                    label={"Yer Aldığı Proje"}
+                    onChange={(e) => {
+                      if (task)
+                        setTask({
+                          ...task,
+                          projectId: e.target.value as number,
+                        });
+                    }}
+                  >
                     {projects.map((project) => (
-                      <option key={project.id} value={project.id}>
+                      <MenuItem key={project.id} value={project.id}>
                         {project.name}
-                      </option>
+                      </MenuItem>
                     ))}
-                  </select>
+                  </Select>
                 </Grid>
                 <Grid md={12}>
-                  <label htmlFor="taskStatusSelect">İşin Durumunu Seç:</label>
-                  <select
-                    id="taskStatusSelect"
-                    onChange={handleTaskStatusChange}
+                  <Select
+                    fullWidth
+                    value={task.taskTypeId}
+                    label={"İş Tipi"}
+                    onChange={(e) => {
+                      if (task)
+                        setTask({
+                          ...task,
+                          taskTypeId: e.target.value as number,
+                        });
+                    }}
+                  >
+                    {taskTypes.map((taskType) => (
+                      <MenuItem key={taskType.id} value={taskType.id}>
+                        {taskType.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </Grid>
+                <Grid md={12}>
+                  <Select
+                    fullWidth
+                    value={task.lastStatusId}
+                    label={"İş Durumu"}
+                    onChange={(e) => {
+                      if (task)
+                        setTask({
+                          ...task,
+                          lastStatusId: e.target.value as number,
+                        });
+                    }}
                   >
                     {taskStatuses.map((taskStatus) => (
-                      <option key={taskStatus.id} value={taskStatus.id}>
+                      <MenuItem key={taskStatus.id} value={taskStatus.id}>
                         {taskStatus.name}
-                      </option>
+                      </MenuItem>
                     ))}
-                  </select>
+                  </Select>
                 </Grid>
                 <Grid md={12}>
                   <Grid container justifyContent={"space-between"}>

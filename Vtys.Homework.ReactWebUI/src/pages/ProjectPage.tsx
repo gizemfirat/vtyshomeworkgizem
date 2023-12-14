@@ -60,7 +60,7 @@ const ProjectPage = () => {
                         <TableCell align="right">
                           <Button
                             onClick={() => {
-                              navigate(`/projects/detail?id=${project.id}`);
+                              navigate(`/project/detail?id=${project.id}`);
                             }}
                             size="small"
                           >
@@ -91,8 +91,14 @@ const ProjectPage = () => {
               <Grid md={2}></Grid>
               <Grid md={12}>
                 <Grid container justifyContent={"flex-end"} spacing={1}>
-                  <Grid item>
-                    <Button variant="contained" size="large">
+                <Grid item>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/project/detail`);
+                      }}
+                    >
                       Ekle
                     </Button>
                   </Grid>

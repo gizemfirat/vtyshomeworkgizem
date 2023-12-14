@@ -7,7 +7,7 @@ import Machine from "../types/entities/Machine";
 
 const MachineDetailPage = () => {
   const navigate = useNavigate();
-  const [machine, setMachine] = useState<Machine>();
+  const [machine, setMachine] = useState<Machine>({id: 0, name: "", serialNumber: 0});
 
 
   const location = useLocation();
@@ -43,8 +43,8 @@ const MachineDetailPage = () => {
             <Box padding={2}>
               <Grid container gap={2}>
                 <Grid md={12}>
-                  <Typography fontWeight={500}>Makine Adı:</Typography>
                   <TextField
+                    label={"Ad"}
                     value={machine?.name}
                     onChange={(e) => {
                       if (machine)
@@ -53,9 +53,9 @@ const MachineDetailPage = () => {
                   />
                 </Grid>
                 <Grid md={12}>
-                  <Typography fontWeight={500}>Seri Numarası:</Typography>
                   <TextField
-                    type="number"
+                    label={"Seri Numarası"}
+                    type=""
                     value={machine?.serialNumber}
                     onChange={(e) => {
                       if (machine)
