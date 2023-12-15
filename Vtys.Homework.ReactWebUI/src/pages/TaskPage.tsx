@@ -99,6 +99,17 @@ const TaskPage = () => {
                       İş Tipleri
                     </Button>
                   </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
+                        navigate(`/taskSource`);
+                      }}
+                    >
+                      İş Kaynakları
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>

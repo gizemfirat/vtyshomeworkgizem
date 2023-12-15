@@ -76,12 +76,24 @@ namespace Vtys.Homework.WebApi.Controllers
 
         [HttpGet]
         [Route("api/projects/{projectId}/projectSources")]
-        public IActionResult GetAllWithDetail(long projectId)
+        public IActionResult GetWithDetail(long projectId)
         {
             return new ContentResult
             {
                 ContentType = "application/json",
                 Content = _projectService.GetSources(projectId).ToJson(),
+                StatusCode = 200,
+            };
+        }
+
+        [HttpGet]
+        [Route("api/projects/projectSources")]
+        public IActionResult GetWithAllDetail()
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _projectService.GetAllSources().ToJson(),
                 StatusCode = 200,
             };
         }

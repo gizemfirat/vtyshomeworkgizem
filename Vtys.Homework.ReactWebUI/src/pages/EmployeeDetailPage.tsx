@@ -20,11 +20,11 @@ const EmployeeDetailPage = () => {
     if (employee) {
       if (employee.id) {
         apiHelper.post<Employee, Employee>(`employees`, employee)
-          .then(() => {})
+          .then(() => {navigate("/employee");})
       } else {
-        apiHelper.post<Employee, Employee>('employees', employee)
-          .then(() => {
-          })
+        apiHelper.post<Employee, Employee>("employees", employee).then(() => {
+          navigate("/employee");
+        });
       }
     }
   };

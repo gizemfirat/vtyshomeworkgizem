@@ -18,12 +18,13 @@ const MachineDetailPage = () => {
   const handleSubmit = () => {
     if (machine) {
       if (machine.id) {
-        apiHelper.post<Machine, Machine>(`machines`, machine)
-          .then(() => {})
+        apiHelper.post<Machine, Machine>(`machines`, machine).then(() => {
+          navigate("/navigate");
+        });
       } else {
-        apiHelper.post<Machine, Machine>('machines', machine)
-          .then(() => {
-          })
+        apiHelper.post<Machine, Machine>("machines", machine).then(() => {
+          navigate("/machine");
+        });
       }
     }
   };
@@ -55,7 +56,7 @@ const MachineDetailPage = () => {
                 <Grid md={12}>
                   <TextField
                     label={"Seri Numarası"}
-                    type=""
+                    type="number"
                     value={machine?.serialNumber}
                     onChange={(e) => {
                       if (machine)

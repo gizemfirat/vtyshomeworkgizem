@@ -25,10 +25,10 @@ const TaskDetailPage = () => {
     if (task) {
       if (task.id) {
         apiHelper.post<Task, Task>(`tasks`, task)
-          .then(() => {})
+          .then(() => {navigate("/task");})
       } else {
         apiHelper.post<Task, Task>('tasks', task)
-          .then(() => {
+          .then(() => {navigate("/task");
           })
       }
     }

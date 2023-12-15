@@ -19,10 +19,10 @@ const TaskTypeDetailPage = () => {
     if (taskType) {
       if (taskType.id) {
         apiHelper.post<TaskType, TaskType>(`taskTypes`, taskType)
-          .then(() => {})
+          .then(() => {navigate("/taskType");})
       } else {
         apiHelper.post<TaskType, TaskType>('taskTypes', taskType)
-          .then(() => {
+          .then(() => {navigate("/taskType");
           })
       }
     }

@@ -1,7 +1,7 @@
 type ProjectSource = {
   id: number,
-  sourceName: string,
-  projectName: string
+  sourceId: number,
+  projectId: number
 
 }
 

@@ -19,6 +19,10 @@ import CustomerDetailPage from "../pages/CustomerDetailPage";
 import ProjectTypeDetailPage from "../pages/ProjectTypeDetailPage";
 import TaskTypeDetailPage from "../pages/TaskTypeDetailPage";
 import ProjectDetailPage from "../pages/ProjectDetailPage";
+import ProjectSourcePage from "../pages/ProjectSourcePage";
+import ProjectSourceDetailPage from "../pages/ProjectSourceDetailPage";
+import TaskSourcePage from "../pages/TaskSourcePage";
+import TaskSourceDetailPage from "../pages/TaskSourceDetailPage";
 
 const Routes = () => useRoutes([{
   path:"/",
@@ -43,7 +47,11 @@ const Routes = () => useRoutes([{
     {path: "customers/detail", element: <CustomerDetailPage/>},
     {path: "projectTypes/detail", element: <ProjectTypeDetailPage/>},
     {path: "taskTypes/detail", element: <TaskTypeDetailPage/>},
-    {path: "project/detail", element: <ProjectDetailPage/>}
+    {path: "project/detail", element: <ProjectDetailPage/>},
+    {path: "projectSource", element: <ProjectSourcePage/>},
+    {path: "projectSources/detail", element: <ProjectSourceDetailPage/>},
+    {path: "taskSource", element: <TaskSourcePage/>},
+    {path: "taskSources/detail", element: <TaskSourceDetailPage/>}
   ]
 }]);
 

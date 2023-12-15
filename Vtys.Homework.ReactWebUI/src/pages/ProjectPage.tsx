@@ -129,6 +129,17 @@ const ProjectPage = () => {
                       variant="contained"
                       size="large"
                       onClick={() => {
+                        navigate(`/projectSource`);
+                      }}
+                    >
+                      Proje Kaynakları
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button
+                      variant="contained"
+                      size="large"
+                      onClick={() => {
                         navigate(`/projects/detail`);
                       }}
                     >
