@@ -19,7 +19,7 @@ const MachineDetailPage = () => {
     if (machine) {
       if (machine.id) {
         apiHelper.post<Machine, Machine>(`machines`, machine).then(() => {
-          navigate("/navigate");
+          navigate("/machine");
         });
       } else {
         apiHelper.post<Machine, Machine>("machines", machine).then(() => {
