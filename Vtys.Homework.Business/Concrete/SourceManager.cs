@@ -7,6 +7,7 @@ using Vtys.Core.Aspects;
 using Vtys.Core.Business.Concrete;
 using Vtys.Core.Results;
 using Vtys.Homework.Business.Abstract;
+using Vtys.Homework.Entities.ComplexTypes;
 using Vtys.Homework.Entities.Concrete;
 
 namespace Vtys.Homework.Business.Concrete
@@ -17,7 +18,12 @@ namespace Vtys.Homework.Business.Concrete
         public IResult GetAll()
         {
             var sources = Repository.GetList<Source>();
-            return new SuccessResult("", sources);
+            return new SuccessResult("", sources.Select(x => new SourceDetail() 
+            { 
+                Id = x.Id, 
+                Name = x.ToString(), 
+                SourceTypeId = x.SourceTypeId 
+            }));
         }
 
         [ExceptionResultAspect]

@@ -3,6 +3,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
 import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Project from "../types/entities/Project";
+import dayjs from "dayjs";
+import moment from "moment";
 
 const ProjectPage = () => {
   const navigate = useNavigate();
@@ -43,10 +45,8 @@ const ProjectPage = () => {
                       <TableRow key={project.id}>
                         <TableCell align="right">{project.id}</TableCell>
                         <TableCell align="right">{project.name}</TableCell>
-                        <TableCell align="right">{project.startDate}</TableCell>
-                        <TableCell align="right">
-                          {project.finishDate}
-                        </TableCell>
+                        <TableCell align="right">{moment(project.startDate).format('DD MM YYYY HH:mm')}</TableCell>
+                        <TableCell align="right">{moment(project.finishDate).format('DD MM YYYY HH:mm')}</TableCell>
                         <TableCell align="right">
                           {project.customerId}
                         </TableCell>
@@ -100,50 +100,6 @@ const ProjectPage = () => {
                       }}
                     >
                       Ekle
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      onClick={() => {
-                        navigate(`/customer`);
-                      }}
-                    >
-                      Müşteriler
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      onClick={() => {
-                        navigate(`/projectType`);
-                      }}
-                    >
-                      Proje Tipleri
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      onClick={() => {
-                        navigate(`/projectSource`);
-                      }}
-                    >
-                      Proje Kaynakları
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      onClick={() => {
-                        navigate(`/projects/detail`);
-                      }}
-                    >
-                      Detayları Gör
                     </Button>
                   </Grid>
                 </Grid>

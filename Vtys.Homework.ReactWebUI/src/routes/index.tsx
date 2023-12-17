@@ -23,6 +23,8 @@ import ProjectSourcePage from "../pages/ProjectSourcePage";
 import ProjectSourceDetailPage from "../pages/ProjectSourceDetailPage";
 import TaskSourcePage from "../pages/TaskSourcePage";
 import TaskSourceDetailPage from "../pages/TaskSourceDetailPage";
+import ProjectStatusPage from "../pages/ProjectStatusPage";
+import ProjectStatusDetailPage from "../pages/ProjectStatusDetailPage";
 
 const Routes = () => useRoutes([{
   path:"/",
@@ -51,7 +53,9 @@ const Routes = () => useRoutes([{
     {path: "projectSource", element: <ProjectSourcePage/>},
     {path: "projectSources/detail", element: <ProjectSourceDetailPage/>},
     {path: "taskSource", element: <TaskSourcePage/>},
-    {path: "taskSources/detail", element: <TaskSourceDetailPage/>}
+    {path: "taskSources/detail", element: <TaskSourceDetailPage/>},
+    {path: "projectStatus", element: <ProjectStatusPage/>},
+    {path: "projectStatuses/detail", element: <ProjectStatusDetailPage/>}
   ]
 }]);
 

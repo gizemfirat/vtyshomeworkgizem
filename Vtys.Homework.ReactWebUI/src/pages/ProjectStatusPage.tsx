@@ -2,53 +2,46 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
 import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import Customer from "../types/entities/Customer";
-import ProjectSource from "../types/entities/ProjectSource";
-import SourceDetail from "../types/models/SourceDetail";
-import ProjectSourceDetail from "../types/models/ProjectSourceDetail";
+import ProjectStatus from "../types/entities/ProjectStatus";
 
-const ProjectSourcePage = () => {
+const ProjectStatusPage = () => {
   const navigate = useNavigate();
 
-  const [projectSources, setProjectSources] = useState<ProjectSourceDetail[]>([]);
+  const [projectStatuses, setProjectStatuses] = useState<ProjectStatus[]>([]);
   const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
-    apiHelper.get<ProjectSourceDetail[]>("projectSources").then((data) => {
-      setProjectSources(data);
+    apiHelper.get<ProjectStatus[]>("projectStatuses").then((data) => {
+      setProjectStatuses(data);
     })
   }, [])
 
   return (
-    <Grid marginTop={12} container>
+    <Grid container>
       <Grid md={2}></Grid>
       <Grid md={8}>
         <Paper>
           <Box padding={2}>
             <Grid container gap={1}>
               <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="projectSource table">
+                <Table sx={{ minWidth: 900 }} aria-label="taskstatus table">
                   <TableHead>
                     <TableRow>
                       <TableCell align="right">ID</TableCell>
-                      <TableCell align="right">Kaynak Adı</TableCell>
-                      <TableCell align="right">Proje Adı</TableCell>
+                      <TableCell align="right">Ad</TableCell>
                       <TableCell align="right"></TableCell>
                       <TableCell align="right"></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {projectSources.map((projectSource) => (
-                      <TableRow key={projectSource.id}>
-                        <TableCell align="right">{projectSource.id}</TableCell>
-                        <TableCell align="right">{projectSource.sourceName}</TableCell>
-                        <TableCell align="right">{projectSource.projectName}</TableCell>
+                    {projectStatuses.map((projectStatus) => (
+                      <TableRow key={projectStatus.id}>
+                        <TableCell align="right">{projectStatus.id}</TableCell>
+                        <TableCell align="right">{projectStatus.name}</TableCell>
                         <TableCell align="right">
                           <Button
                             onClick={() => {
-                              navigate(
-                                `/projectSources/detail?id=${projectSource.id}`
-                              );
+                              navigate(`/projectStatuses/detail?id=${projectStatus.id}`);
                             }}
                             size="small"
                           >
@@ -57,11 +50,11 @@ const ProjectSourcePage = () => {
                         </TableCell>
                         <TableCell align="right">
                           <Button
-                           onClick={() => {
-                            apiHelper.delete<void>(`projectSources/${projectSource.id}`).then( () => {
-                              setProjectSources(projectSources.filter(x => x.id !== projectSource.id))
-                            });
-                          }}
+                            onClick={() => {
+                              apiHelper.delete<void>(`projectStatuses/${projectStatus.id}`).then( () => {
+                                setProjectStatuses(projectStatuses.filter(x => x.id !== projectStatus.id))
+                              });
+                            }}
                             size="small"
                           >
                             Sil
@@ -76,11 +69,11 @@ const ProjectSourcePage = () => {
               <Grid md={12}>
                 <Grid container justifyContent={"flex-end"} spacing={1}>
                   <Grid item>
-                  <Button
+                    <Button
                       variant="contained"
                       size="large"
                       onClick={() => {
-                        navigate(`/projectSources/detail`);
+                        navigate(`/projectStatuses/detail`);
                       }}
                     >
                       Ekle
@@ -95,4 +88,4 @@ const ProjectSourcePage = () => {
     </Grid>
   );
 }
-export default ProjectSourcePage;
+export default ProjectStatusPage;

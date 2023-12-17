@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
-import Machine from "../types/entities/Machine";
+import Customer from "../types/entities/Customer";
+import ProjectStatus from "../types/entities/ProjectStatus";
 
 
-const MachineDetailPage = () => {
+const ProjectStatusDetailPage = () => {
   const navigate = useNavigate();
-  const [machine, setMachine] = useState<Machine>({id: 0, name: "", serialNumber: 0});
+  const [projectStatus, setProjectStatus] = useState<ProjectStatus>({id: 0, name: "", isFırst: false, isLast: false});
 
 
   const location = useLocation();
@@ -16,26 +17,24 @@ const MachineDetailPage = () => {
   const id = queryParams.get("id");
 
   const handleSubmit = () => {
-    if (machine) {
-      if (machine.id) {
-        apiHelper.post<Machine, Machine>(`machines`, machine).then(() => {
-          navigate("/machine");
+    if (projectStatus) {
+      if (projectStatus.id) {
+        apiHelper.post<ProjectStatus, ProjectStatus>(`projectStatuses`, projectStatus).then(() => {
+          navigate("/projectStatus");
         });
       } else {
-        apiHelper.post<Machine, Machine>("machines", machine).then(() => {
-          navigate("/machine");
+        apiHelper.post<ProjectStatus, ProjectStatus>("projectStatuses", projectStatus).then(() => {
+          navigate("/projectStatus");
         });
       }
     }
   };
 
   useEffect(() => {
-    if (id) {
-      apiHelper.get<Machine>(`machines/${id}`).then((data) => {
-        setMachine(data);
-      });
-    }
-  }, [id]);
+    apiHelper.get<ProjectStatus>(`projectStatus/${id}`).then((data) => {
+      setProjectStatus(data);
+    })
+  }, [id])
 
   return (
     <div>
@@ -48,26 +47,10 @@ const MachineDetailPage = () => {
                 <Grid md={12}>
                   <TextField
                     label={"Ad"}
-                    value={machine.name}
-                    fullWidth
+                    value={projectStatus?.name}
                     onChange={(e) => {
-                      if (machine)
-                        setMachine({ ...machine, name: e.target.value });
-                    }}
-                  />
-                </Grid>
-                <Grid md={12}>
-                  <TextField
-                    label={"Seri Numarası"}
-                    type="number"
-                    value={machine.serialNumber}
-                    fullWidth
-                    onChange={(e) => {
-                      if (machine)
-                        setMachine({
-                          ...machine,
-                          serialNumber: parseInt(e.target.value),
-                        });
+                      if (projectStatus)
+                        setProjectStatus({ ...projectStatus, name: e.target.value });
                     }}
                   />
                 </Grid>
@@ -89,4 +72,4 @@ const MachineDetailPage = () => {
     </div>
   );
 }
-export default MachineDetailPage;
+export default ProjectStatusDetailPage;

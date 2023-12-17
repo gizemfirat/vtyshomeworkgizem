@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Vtys.Core.ExtensionMethods;
 using Vtys.Homework.Business.Abstract;
+using Vtys.Homework.Entities.ComplexTypes;
 using Vtys.Homework.Entities.Concrete;
 
 namespace Vtys.Homework.WebApi.Controllers
@@ -40,14 +41,15 @@ namespace Vtys.Homework.WebApi.Controllers
 
         [HttpPost]
         [Route("api/projects")]
-        public IActionResult Save([FromBody] Project project)
+        public IActionResult Save([FromBody] ProjectSavingModel model)
         {
-            return new ContentResult
-            {
-                ContentType = "application/json",
-                Content = _projectService.Save(project).ToJson(),
-                StatusCode = 200,
-            };
+             return new ContentResult
+             {
+                 ContentType = "application/json",
+                 Content = _projectService.Save(model).ToJson(),
+                 StatusCode = 200,
+             };
+
         }
 
         [HttpDelete]

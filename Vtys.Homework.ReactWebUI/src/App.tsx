@@ -6,16 +6,19 @@ import User from './types/entities/User';
 import RegisterPage from './pages/RegisterPage';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 
 const App =() => {
 
 
   return (
-    <div>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
       <BrowserRouter>
         <Routes />
       </BrowserRouter>
-    </div>
+    </LocalizationProvider>
   );
 }
 
