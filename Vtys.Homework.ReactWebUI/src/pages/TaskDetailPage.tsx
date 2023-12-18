@@ -9,6 +9,7 @@ import TaskStatus from "../types/entities/TaskStatus";
 import TaskType from "../types/entities/TaskType";
 import SourceDetail from "../types/models/SourceDetail";
 import TaskSavingModel from "../types/models/TaskSavingModel";
+import TaskWithSourceIds from "../types/models/TaskWithSourceIds";
 
 
 const TaskDetailPage = () => {
@@ -26,28 +27,30 @@ const TaskDetailPage = () => {
   const id = queryParams.get("id");
 
   const handleSubmit = () => {
-    // if (task) {
-    //   if (task.id) {
-    //     apiHelper
-    //       .post<TaskSavingModel, Task>(`tasks`, { task, sourceIds, projectId })
-    //       .then(() => {
-    //         navigate("/task");
-    //       });
-    //   } else {
-    //     apiHelper
-    //       .post<TaskSavingModel, Task>("tasks", { task, sourceIds, projectId })
-    //       .then(() => {
-    //         navigate("/task");
-    //       });
-    //   }
-    // }
+    if (task) {
+      if (task.id) {
+        apiHelper
+          .post<TaskSavingModel, Task>(`tasks`, {task, sourceIds})
+          .then(() => {
+            navigate("/task");
+          });
+      } else {
+        apiHelper
+          .post<TaskSavingModel, Task>("tasks", {task, sourceIds})
+          .then(() => {
+            navigate("/task");
+          });
+      }
+    }
   };
 
   useEffect(() => {
-    apiHelper.get<Task>(`tasks/${id}`).then((data) => {
-      setTask(data);
-    })
-  }, [id])
+    if (id)
+      apiHelper.get<TaskWithSourceIds>(`tasks/${id}`).then((data) => {
+        setTask(data.task);
+        setSourceIds(data.sourceIds);
+      });
+  }, [id]);
 
   useEffect(() => {
     apiHelper.get<Project[]>("projects").then((data) => {

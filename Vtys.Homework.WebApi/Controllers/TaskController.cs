@@ -74,5 +74,17 @@ namespace Vtys.Homework.WebApi.Controllers
                 StatusCode = 200,
             };
         }
+
+        [HttpGet]
+        [Route("api/tasks/{id}/history")]
+        public IActionResult GetHistory(long id)
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _taskService.GetHistory(id).ToJson(),
+                StatusCode = 200,
+            };
+        }
     }
 }

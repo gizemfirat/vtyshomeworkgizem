@@ -12,5 +12,7 @@ namespace Vtys.Homework.Business.Abstract
         IResult Save(TaskSavingModel model);
         IResult DeleteById(long id);
         IResult GetAllSources();
+
+        IResult GetHistory(long taskId);
     }
 }

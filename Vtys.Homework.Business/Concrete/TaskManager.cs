@@ -9,6 +9,7 @@ using Vtys.Core.Results;
 using Vtys.Homework.Business.Abstract;
 using Vtys.Homework.Entities.ComplexTypes;
 using Vtys.Homework.Entities.Concrete;
+using TaskStatus = Vtys.Homework.Entities.Concrete.TaskStatus;
 
 namespace Vtys.Homework.Business.Concrete
 {
@@ -25,7 +26,9 @@ namespace Vtys.Homework.Business.Concrete
         public IResult GetById(long id)
         {
             var task = Repository.Get<Entities.Concrete.Task>(x => x.Id == id);
-            return new SuccessResult("", task);
+            var sourceIds = Repository.GetList<TaskSource>(x => x.TaskId == task.Id).Select(x => x.SourceId);
+            var result = new { Task = task, SourceIds = sourceIds };
+            return new SuccessResult("", result);
         }
 
         [ExceptionResultAspect]
@@ -75,6 +78,24 @@ namespace Vtys.Homework.Business.Concrete
             var sourceIds = taskSources.Select(x => x.SourceId);
             var sources = Repository.GetList<Source>(x => sourceIds.Contains(x.Id));
             return new SuccessResult("", sources);
+        }
+
+        [ExceptionResultAspect]
+        public IResult GetHistory(long taskId)
+        {
+            var taskStatusHistories = Repository.GetList<TaskStatusHistory>(x => x.TaskId == taskId);
+            var statusIds = taskStatusHistories.Select(x => x.StatusId);
+            var taskStatuses = Repository.GetList<TaskStatus>(x => statusIds.Contains(x.Id));
+            var result = (from tsh in taskStatusHistories
+                          join ts in taskStatuses on tsh.StatusId equals ts.Id
+                          orderby tsh.InsertedDate descending
+                          select new
+                          {
+                              Name = ts.Name,
+                              Date = tsh.InsertedDate
+                          });
+
+            return new SuccessResult("", result);
         }
     }
 }
