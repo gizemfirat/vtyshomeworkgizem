@@ -25,6 +25,8 @@ import TaskSourcePage from "../pages/TaskSourcePage";
 import TaskSourceDetailPage from "../pages/TaskSourceDetailPage";
 import ProjectStatusPage from "../pages/ProjectStatusPage";
 import ProjectStatusDetailPage from "../pages/ProjectStatusDetailPage";
+import TaskStatusPage from "../pages/TaskStatusPage";
+import TaskStatusDetailPage from "../pages/TaskStatusDetailPage";
 
 const Routes = () => useRoutes([{
   path:"/",
@@ -55,7 +57,9 @@ const Routes = () => useRoutes([{
     {path: "taskSource", element: <TaskSourcePage/>},
     {path: "taskSources/detail", element: <TaskSourceDetailPage/>},
     {path: "projectStatus", element: <ProjectStatusPage/>},
-    {path: "projectStatuses/detail", element: <ProjectStatusDetailPage/>}
+    {path: "projectStatuses/detail", element: <ProjectStatusDetailPage/>},
+    {path: "taskStatus", element: <TaskStatusPage/>},
+    {path: "taskStatuses/detail", element: <TaskStatusDetailPage/>},
   ]
 }]);
 

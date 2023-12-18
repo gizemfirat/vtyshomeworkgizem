@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
 import Employee from "../types/entities/Employee";
-import { Box, Button, Grid, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 import Department from "../types/entities/Department";
 
 
@@ -72,24 +72,27 @@ const EmployeeDetailPage = () => {
                   />
                 </Grid>
                 <Grid md={12}>
-                  <Select
-                    fullWidth
-                    value={employee.departmentId}
-                    label={"Departman"}
-                    onChange={(e) => {
-                      if (employee)
-                        setEmployee({
-                          ...employee,
-                          departmentId: e.target.value as number,
-                        });
-                    }}
-                  >
-                    {departments.map((department) => (
-                      <MenuItem key={department.id} value={department.id}>
-                        {department.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  <FormControl fullWidth>
+                    <InputLabel>Departman</InputLabel>
+                    <Select
+                      fullWidth
+                      value={employee.departmentId}
+                      label={"Departman"}
+                      onChange={(e) => {
+                        if (employee)
+                          setEmployee({
+                            ...employee,
+                            departmentId: e.target.value as number,
+                          });
+                      }}
+                    >
+                      {departments.map((department) => (
+                        <MenuItem key={department.id} value={department.id}>
+                          {department.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid md={12}>
                   <Grid container justifyContent={"space-between"}>

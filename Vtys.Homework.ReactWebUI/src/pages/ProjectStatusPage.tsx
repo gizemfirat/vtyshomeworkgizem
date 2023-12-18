@@ -24,7 +24,7 @@ const ProjectStatusPage = () => {
           <Box padding={2}>
             <Grid container gap={1}>
               <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 900 }} aria-label="taskstatus table">
+                <Table sx={{ minWidth: 900 }} aria-label="projectstatus table">
                   <TableHead>
                     <TableRow>
                       <TableCell align="right">ID</TableCell>

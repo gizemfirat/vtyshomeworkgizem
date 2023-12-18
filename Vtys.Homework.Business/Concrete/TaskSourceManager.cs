@@ -16,8 +16,23 @@ namespace Vtys.Homework.Business.Concrete
         [ExceptionResultAspect]
         public IResult GetAll()
         {
-            var taskSource = Repository.GetList<TaskSource>();
-            return new SuccessResult("", taskSource);
+            var taskSources = Repository.GetList<TaskSource>();
+            var sourceIds = taskSources.Select(x => x.SourceId);
+            var taskIds = taskSources.Select(x => x.TaskId);
+            var sources = Repository.GetList<Source>(x => sourceIds.Contains(x.Id));
+            var tasks = Repository.GetList<Entities.Concrete.Task>(x => taskIds.Contains(x.Id));
+
+            var result = (from ts in taskSources
+                          join source in sources on ts.SourceId equals source.Id
+                          join task in tasks on ts.TaskId equals task.Id
+                          select new
+                          {
+                              Id = ts.Id,
+                              SourceName = source.ToString(),
+                              TaskName = task.Name
+                          });
+
+            return new SuccessResult("", result);
         }
 
         [ExceptionResultAspect]

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
-import Customer from "../types/entities/Customer";
 import ProjectStatus from "../types/entities/ProjectStatus";
 
 
@@ -31,7 +30,7 @@ const ProjectStatusDetailPage = () => {
   };
 
   useEffect(() => {
-    apiHelper.get<ProjectStatus>(`projectStatus/${id}`).then((data) => {
+    apiHelper.get<ProjectStatus>(`projectStatuses/${id}`).then((data) => {
       setProjectStatus(data);
     })
   }, [id])

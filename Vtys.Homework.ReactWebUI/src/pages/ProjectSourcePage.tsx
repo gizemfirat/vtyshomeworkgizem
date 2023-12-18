@@ -33,8 +33,6 @@ const ProjectSourcePage = () => {
                       <TableCell align="right">ID</TableCell>
                       <TableCell align="right">Kaynak Adı</TableCell>
                       <TableCell align="right">Proje Adı</TableCell>
-                      <TableCell align="right"></TableCell>
-                      <TableCell align="right"></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -43,30 +41,6 @@ const ProjectSourcePage = () => {
                         <TableCell align="right">{projectSource.id}</TableCell>
                         <TableCell align="right">{projectSource.sourceName}</TableCell>
                         <TableCell align="right">{projectSource.projectName}</TableCell>
-                        <TableCell align="right">
-                          <Button
-                            onClick={() => {
-                              navigate(
-                                `/projectSources/detail?id=${projectSource.id}`
-                              );
-                            }}
-                            size="small"
-                          >
-                            Düzenle
-                          </Button>
-                        </TableCell>
-                        <TableCell align="right">
-                          <Button
-                           onClick={() => {
-                            apiHelper.delete<void>(`projectSources/${projectSource.id}`).then( () => {
-                              setProjectSources(projectSources.filter(x => x.id !== projectSource.id))
-                            });
-                          }}
-                            size="small"
-                          >
-                            Sil
-                          </Button>
-                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -75,17 +49,6 @@ const ProjectSourcePage = () => {
               <Grid md={2}></Grid>
               <Grid md={12}>
                 <Grid container justifyContent={"flex-end"} spacing={1}>
-                  <Grid item>
-                  <Button
-                      variant="contained"
-                      size="large"
-                      onClick={() => {
-                        navigate(`/projectSources/detail`);
-                      }}
-                    >
-                      Ekle
-                    </Button>
-                  </Grid>
                 </Grid>
               </Grid>
             </Grid>

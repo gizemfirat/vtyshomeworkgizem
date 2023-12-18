@@ -160,44 +160,53 @@ const ProjectDetailPage = () => {
                   </FormControl>
                 </Grid>
                 <Grid md={12}>
-                  <Select
-                    fullWidth
-                    value={project.projectTypeId}
-                    label={"Proje Tipi"}
-                    onChange={(e) => {
-                      if (project)
-                        setProject({
-                          ...project,
-                          projectTypeId: e.target.value as number,
-                        });
-                    }}
-                  >
-                    {projectTypes.map((projectType) => (
-                      <MenuItem key={projectType.id} value={projectType.id}>
-                        {projectType.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  <FormControl fullWidth>
+                    <InputLabel>Proje Tipi</InputLabel>
+                    <Select
+                      fullWidth
+                      value={project.projectTypeId}
+                      label={"Proje Tipi"}
+                      onChange={(e) => {
+                        if (project)
+                          setProject({
+                            ...project,
+                            projectTypeId: e.target.value as number,
+                          });
+                      }}
+                    >
+                      {projectTypes.map((projectType) => (
+                        <MenuItem key={projectType.id} value={projectType.id}>
+                          {projectType.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid md={12}>
-                  <Select
-                    fullWidth
-                    value={project.lastStatusId}
-                    label={"Proje Durumu"}
-                    onChange={(e) => {
-                      if (project)
-                        setProject({
-                          ...project,
-                          lastStatusId: e.target.value as number,
-                        });
-                    }}
-                  >
-                    {projectStatuses.map((projectStatus) => (
-                      <MenuItem key={projectStatus.id} value={projectStatus.id}>
-                        {projectStatus.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  <FormControl fullWidth>
+                    <InputLabel>Proje Durumu</InputLabel>
+                    <Select
+                      fullWidth
+                      value={project.lastStatusId}
+                      label={"Proje Durumu"}
+                      onChange={(e) => {
+                        if (project)
+                          setProject({
+                            ...project,
+                            lastStatusId: e.target.value as number,
+                          });
+                      }}
+                    >
+                      {projectStatuses.map((projectStatus) => (
+                        <MenuItem
+                          key={projectStatus.id}
+                          value={projectStatus.id}
+                        >
+                          {projectStatus.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid md={12}>
                   <Grid container justifyContent={"space-between"}>

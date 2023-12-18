@@ -58,6 +58,7 @@ const Layout = () => {
                 { label: "İş Listesi", value: "/task" },
                 { label: "İş Tipleri", value: "/taskType" },
                 { label: "İş Kaynakları", value: "/taskSource" },
+                { label: "İş Durumları", value: "/taskStatus"},
               ]}
               onClick={(value) => handleNavigation(value)}
             />

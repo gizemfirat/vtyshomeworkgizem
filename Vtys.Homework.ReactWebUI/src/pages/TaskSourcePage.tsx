@@ -4,16 +4,17 @@ import apiHelper from "../helpers/apiHelper";
 import { Box, Button, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import Customer from "../types/entities/Customer";
 import ProjectSource from "../types/entities/ProjectSource";
-import TaskSource from "../types/entities/TaskSource";
+import SourceDetail from "../types/models/SourceDetail";
+import TaskSourceDetail from "../types/models/TaskSourceDetail";
 
 const TaskSourcePage = () => {
   const navigate = useNavigate();
 
-  const [taskSources, setTaskSources] = useState<TaskSource[]>([]);
+  const [taskSources, setTaskSources] = useState<TaskSourceDetail[]>([]);
   const [showAddForm, setShowAddForm] = useState(false);
 
   useEffect(() => {
-    apiHelper.get<TaskSource[]>("taskSources").then((data) => {
+    apiHelper.get<TaskSourceDetail[]>("taskSources").then((data) => {
       setTaskSources(data);
     })
   }, [])
@@ -30,42 +31,16 @@ const TaskSourcePage = () => {
                   <TableHead>
                     <TableRow>
                       <TableCell align="right">ID</TableCell>
-                      <TableCell align="right">Kaynak ID'si</TableCell>
-                      <TableCell align="right">İş ID'si</TableCell>
-                      <TableCell align="right"></TableCell>
-                      <TableCell align="right"></TableCell>
+                      <TableCell align="right">Kaynak Adı</TableCell>
+                      <TableCell align="right">İş Adı</TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {taskSources.map((taskSource) => (
                       <TableRow key={taskSource.id}>
                         <TableCell align="right">{taskSource.id}</TableCell>
-                        <TableCell align="right">{taskSource.sourceId}</TableCell>
-                        <TableCell align="right">{taskSource.taskId}</TableCell>
-                        <TableCell align="right">
-                          <Button
-                            onClick={() => {
-                              navigate(
-                                `/taskSources/detail?id=${taskSource.id}`
-                              );
-                            }}
-                            size="small"
-                          >
-                            Düzenle
-                          </Button>
-                        </TableCell>
-                        <TableCell align="right">
-                          <Button
-                           onClick={() => {
-                            apiHelper.delete<void>(`taskSources/${taskSource.id}`).then( () => {
-                              setTaskSources(taskSources.filter(x => x.id !== taskSource.id))
-                            });
-                          }}
-                            size="small"
-                          >
-                            Sil
-                          </Button>
-                        </TableCell>
+                        <TableCell align="right">{taskSource.sourceName}</TableCell>
+                        <TableCell align="right">{taskSource.taskName}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -74,17 +49,6 @@ const TaskSourcePage = () => {
               <Grid md={2}></Grid>
               <Grid md={12}>
                 <Grid container justifyContent={"flex-end"} spacing={1}>
-                  <Grid item>
-                  <Button
-                      variant="contained"
-                      size="large"
-                      onClick={() => {
-                        navigate(`/taskSources/detail`);
-                      }}
-                    >
-                      Ekle
-                    </Button>
-                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
