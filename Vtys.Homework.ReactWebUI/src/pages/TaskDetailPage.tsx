@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
 import Employee from "../types/entities/Employee";
-import { Box, Button, Grid, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 import Project from "../types/entities/Project";
 import Task from "../types/entities/Task";
 import TaskStatus from "../types/entities/TaskStatus";
 import TaskType from "../types/entities/TaskType";
+import SourceDetail from "../types/models/SourceDetail";
+import TaskSavingModel from "../types/models/TaskSavingModel";
+import TaskWithSourceIds from "../types/models/TaskWithSourceIds";
 
 
 const TaskDetailPage = () => {
@@ -15,6 +18,8 @@ const TaskDetailPage = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [taskStatuses, setTaskStatuses] = useState<TaskStatus[]>([]);
   const [taskTypes, setTaskTypes] = useState<TaskType[]>([]);
+  const [sources, setSources] = useState<SourceDetail[]>([]);
+  const [sourceIds, setSourceIds] = useState<number[]>([]);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -24,25 +29,38 @@ const TaskDetailPage = () => {
   const handleSubmit = () => {
     if (task) {
       if (task.id) {
-        apiHelper.post<Task, Task>(`tasks`, task)
-          .then(() => {})
-      } else {
-        apiHelper.post<Task, Task>('tasks', task)
+        apiHelper
+          .post<TaskSavingModel, Task>(`tasks`, {task, sourceIds})
           .then(() => {
-          })
+            navigate("/task");
+          });
+      } else {
+        apiHelper
+          .post<TaskSavingModel, Task>("tasks", {task, sourceIds})
+          .then(() => {
+            navigate("/task");
+          });
       }
     }
   };
 
   useEffect(() => {
-    apiHelper.get<Task>(`tasks/${id}`).then((data) => {
-      setTask(data);
-    })
-  }, [id])
+    if (id)
+      apiHelper.get<TaskWithSourceIds>(`tasks/${id}`).then((data) => {
+        setTask(data.task);
+        setSourceIds(data.sourceIds);
+      });
+  }, [id]);
 
   useEffect(() => {
     apiHelper.get<Project[]>("projects").then((data) => {
       setProjects(data);
+    })
+  }, [])
+
+  useEffect(() => {
+    apiHelper.get<SourceDetail[]>("sources").then((data) => {
+      setSources(data);
     })
   }, [])
 
@@ -72,70 +90,98 @@ const TaskDetailPage = () => {
                     label={"Ad"}
                     value={task?.name}
                     onChange={(e) => {
-                      if (task)
-                        setTask({ ...task, name: e.target.value });
+                      if (task) setTask({ ...task, name: e.target.value });
                     }}
                   />
                 </Grid>
                 <Grid md={12}>
-                  <Select
-                    fullWidth
-                    value={task.projectId}
-                    label={"Yer Aldığı Proje"}
-                    onChange={(e) => {
-                      if (task)
-                        setTask({
-                          ...task,
-                          projectId: e.target.value as number,
-                        });
-                    }}
-                  >
-                    {projects.map((project) => (
-                      <MenuItem key={project.id} value={project.id}>
-                        {project.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  <FormControl fullWidth>
+                    <InputLabel>Yer Alacağı Proje</InputLabel>
+                    <Select
+                      fullWidth
+                      value={task.projectId}
+                      label={"Yer Aldığı Proje"}
+                      onChange={(e) => {
+                        if (task)
+                          setTask({
+                            ...task,
+                            projectId: e.target.value as number,
+                          });
+                      }}
+                    >
+                      {projects.map((project) => (
+                        <MenuItem key={project.id} value={project.id}>
+                          {project.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid md={12}>
-                  <Select
-                    fullWidth
-                    value={task.taskTypeId}
-                    label={"İş Tipi"}
-                    onChange={(e) => {
-                      if (task)
-                        setTask({
-                          ...task,
-                          taskTypeId: e.target.value as number,
-                        });
-                    }}
-                  >
-                    {taskTypes.map((taskType) => (
-                      <MenuItem key={taskType.id} value={taskType.id}>
-                        {taskType.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  <FormControl fullWidth>
+                    <InputLabel>Kaynaklar</InputLabel>
+                    <Select
+                      multiple
+                      fullWidth
+                      label={"Kaynaklar"}
+                      value={sourceIds}
+                      onChange={(e) => {
+                        setSourceIds(e.target.value as []);
+                      }}
+                    >
+                      {sources.map((source) => (
+                        <MenuItem key={source.id} value={source.id}>
+                          {source.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid md={12}>
-                  <Select
-                    fullWidth
-                    value={task.lastStatusId}
-                    label={"İş Durumu"}
-                    onChange={(e) => {
-                      if (task)
-                        setTask({
-                          ...task,
-                          lastStatusId: e.target.value as number,
-                        });
-                    }}
-                  >
-                    {taskStatuses.map((taskStatus) => (
-                      <MenuItem key={taskStatus.id} value={taskStatus.id}>
-                        {taskStatus.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  <FormControl fullWidth>
+                    <InputLabel>İş Tipi</InputLabel>
+                    <Select
+                      fullWidth
+                      value={task.taskTypeId}
+                      label={"İş Tipi"}
+                      onChange={(e) => {
+                        if (task)
+                          setTask({
+                            ...task,
+                            taskTypeId: e.target.value as number,
+                          });
+                      }}
+                    >
+                      {taskTypes.map((taskType) => (
+                        <MenuItem key={taskType.id} value={taskType.id}>
+                          {taskType.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid md={12}>
+                  <FormControl fullWidth>
+                    <InputLabel>İş Durumu</InputLabel>
+                    <Select
+                      fullWidth
+                      value={task.lastStatusId}
+                      label={"İş Durumu"}
+                      onChange={(e) => {
+                        if (task)
+                          setTask({
+                            ...task,
+                            lastStatusId: e.target.value as number,
+                          });
+                      }}
+                    >
+                      {taskStatuses.map((taskStatus) => (
+                        <MenuItem key={taskStatus.id} value={taskStatus.id}>
+                          {taskStatus.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid md={12}>
                   <Grid container justifyContent={"space-between"}>

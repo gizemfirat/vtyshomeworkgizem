@@ -4,6 +4,7 @@ using Vtys.Core.Results;
 using Vtys.Homework.Business.Abstract;
 using Vtys.Homework.Business.Constants;
 using Vtys.Homework.DataAccess.Abstract.Queries;
+using Vtys.Homework.Entities.ComplexTypes;
 using Vtys.Homework.Entities.Concrete;
 
 namespace Vtys.Homework.Business.Concrete
@@ -31,11 +32,29 @@ namespace Vtys.Homework.Business.Concrete
         }
 
         [ExceptionResultAspect]
-        public IResult Save(Project project)
+        [TransactionScopeAspect]
+        public IResult Save(ProjectSavingModel model)
         {
-            project = project.Id == 0
-                ? Repository.Add(project)
-                : Repository.Update(project);
+            var project = model.Project.Id == 0
+                ? Repository.Add(model.Project)
+                : Repository.Update(model.Project);
+
+            var projectSources = Repository.GetList<ProjectSource>(x => x.ProjectId == project.Id);
+            var deleteds = projectSources.Where(x => !model.SourceIds.Contains(x.SourceId));
+            var addeds = model.SourceIds.Where(x => !projectSources.Any(y => y.SourceId == x));
+
+            foreach (var source in deleteds) 
+            {
+                Repository.Delete(source);
+            }
+            foreach (var sourceId in addeds)
+            {
+                Repository.Add(new ProjectSource() 
+                {
+                    ProjectId = project.Id,
+                    SourceId = sourceId,
+                });
+            }
 
             return new SuccessResult("", project);
         }
@@ -62,6 +81,15 @@ namespace Vtys.Homework.Business.Concrete
         public IResult GetSources(long projectId)
         {
             var projectSources = Repository.GetList<ProjectSource>(x => x.ProjectId == projectId);
+            var sourceIds = projectSources.Select(x => x.SourceId);
+            var sources = Repository.GetList<Source>(x => sourceIds.Contains(x.Id));
+            return new SuccessResult("", sources);
+        }
+
+        [ExceptionResultAspect]
+        public IResult GetAllSources()
+        {
+            var projectSources = Repository.GetList<ProjectSource>();
             var sourceIds = projectSources.Select(x => x.SourceId);
             var sources = Repository.GetList<Source>(x => sourceIds.Contains(x.Id));
             return new SuccessResult("", sources);

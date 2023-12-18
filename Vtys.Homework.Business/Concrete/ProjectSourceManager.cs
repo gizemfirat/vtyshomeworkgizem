@@ -18,8 +18,23 @@ namespace Vtys.Homework.Business.Concrete
         [ExceptionResultAspect]
         public IResult GetAll()
         {
-            var projectSource = Repository.GetList<ProjectSource>();
-            return new SuccessResult("", projectSource);
+            var projectSources = Repository.GetList<ProjectSource>();
+            var sourceIds = projectSources.Select(x => x.SourceId);
+            var projectIds = projectSources.Select(x => x.ProjectId);
+            var sources = Repository.GetList<Source>(x => sourceIds.Contains(x.Id));
+            var projects = Repository.GetList<Project>(x => projectIds.Contains(x.Id));
+
+            var result = (from ps in projectSources
+                          join source in sources on ps.SourceId equals source.Id
+                          join project in projects on ps.ProjectId equals project.Id
+                          select new 
+                          {
+                              Id = ps.Id,
+                              SourceName = source.ToString(),
+                              ProjectName = project.Name
+                          });
+                        
+            return new SuccessResult("", result);
         }
 
         [ExceptionResultAspect]

@@ -4,8 +4,8 @@ type Project = {
   customerId: number,
   lastStatusId: number,
   projectTypeId: number,
-  startDate: string,
-  finishDate: string
+  startDate: Date,
+  finishDate: Date
 }
 
 export default Project;

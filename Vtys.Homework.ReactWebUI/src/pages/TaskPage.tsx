@@ -33,6 +33,7 @@ const TaskPage = () => {
                       <TableCell align="right">Son Durum</TableCell>
                       <TableCell align="right"></TableCell>
                       <TableCell align="right"></TableCell>
+                      <TableCell align="right"></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -43,6 +44,16 @@ const TaskPage = () => {
                         <TableCell align="right">{task.projectId}</TableCell>
                         <TableCell align="right">{task.taskTypeId}</TableCell>
                         <TableCell align="right">{task.lastStatusId}</TableCell>
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => {
+                              navigate(`/task/history?id=${task.id}`);
+                            }}
+                            size="small"
+                          >
+                            Tarihçe
+                          </Button>
+                        </TableCell>
                         <TableCell align="right">
                           <Button
                             onClick={() => {
@@ -86,17 +97,6 @@ const TaskPage = () => {
                       }}
                     >
                       Ekle
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button
-                      variant="contained"
-                      size="large"
-                      onClick={() => {
-                        navigate(`/taskType`);
-                      }}
-                    >
-                      İş Tipleri
                     </Button>
                   </Grid>
                 </Grid>

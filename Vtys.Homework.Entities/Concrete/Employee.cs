@@ -7,5 +7,10 @@ namespace Vtys.Homework.Entities.Concrete
         public string Surname { get; set; }
 
         public long DepartmentId {  get; set; }
+
+        public override string ToString()
+        {
+            return $"{Name} {Surname}";
+        }
     }
 }

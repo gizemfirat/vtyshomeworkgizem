@@ -18,12 +18,13 @@ const CustomerDetailPage = () => {
   const handleSubmit = () => {
     if (customer) {
       if (customer.id) {
-        apiHelper.post<Customer, Customer>(`customers`, customer)
-          .then(() => {})
+        apiHelper.post<Customer, Customer>(`customers`, customer).then(() => {
+          navigate("/customer");
+        });
       } else {
-        apiHelper.post<Customer, Customer>('customers', customer)
-          .then(() => {
-          })
+        apiHelper.post<Customer, Customer>("customers", customer).then(() => {
+          navigate("/customer");
+        });
       }
     }
   };

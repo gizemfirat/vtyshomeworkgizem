@@ -9,5 +9,7 @@ namespace Vtys.Homework.Entities.Concrete
         public long Id { get; set; }
 
         public string Name { get; set; }
+
+        public long SourceTypeId { get; set; }
     }
 }

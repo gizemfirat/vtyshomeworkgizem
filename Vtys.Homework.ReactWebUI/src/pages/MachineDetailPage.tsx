@@ -18,21 +18,24 @@ const MachineDetailPage = () => {
   const handleSubmit = () => {
     if (machine) {
       if (machine.id) {
-        apiHelper.post<Machine, Machine>(`machines`, machine)
-          .then(() => {})
+        apiHelper.post<Machine, Machine>(`machines`, machine).then(() => {
+          navigate("/machine");
+        });
       } else {
-        apiHelper.post<Machine, Machine>('machines', machine)
-          .then(() => {
-          })
+        apiHelper.post<Machine, Machine>("machines", machine).then(() => {
+          navigate("/machine");
+        });
       }
     }
   };
 
   useEffect(() => {
-    apiHelper.get<Machine>(`machines/${id}`).then((data) => {
-      setMachine(data);
-    })
-  }, [id])
+    if (id) {
+      apiHelper.get<Machine>(`machines/${id}`).then((data) => {
+        setMachine(data);
+      });
+    }
+  }, [id]);
 
   return (
     <div>
@@ -45,7 +48,8 @@ const MachineDetailPage = () => {
                 <Grid md={12}>
                   <TextField
                     label={"Ad"}
-                    value={machine?.name}
+                    value={machine.name}
+                    fullWidth
                     onChange={(e) => {
                       if (machine)
                         setMachine({ ...machine, name: e.target.value });
@@ -55,8 +59,9 @@ const MachineDetailPage = () => {
                 <Grid md={12}>
                   <TextField
                     label={"Seri Numarası"}
-                    type=""
-                    value={machine?.serialNumber}
+                    type="number"
+                    value={machine.serialNumber}
+                    fullWidth
                     onChange={(e) => {
                       if (machine)
                         setMachine({

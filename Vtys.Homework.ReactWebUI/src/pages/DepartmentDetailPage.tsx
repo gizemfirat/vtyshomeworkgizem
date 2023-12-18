@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
+import Customer from "../types/entities/Customer";
 import Department from "../types/entities/Department";
 
 
@@ -18,12 +19,13 @@ const DepartmentDetailPage = () => {
   const handleSubmit = () => {
     if (department) {
       if (department.id) {
-        apiHelper.post<Department, Department>(`departments`, department)
-          .then(() => {})
+        apiHelper.post<Department, Department>(`departments`, department).then(() => {
+          navigate("/department");
+        });
       } else {
-        apiHelper.post<Department, Department>('departments', department)
-          .then(() => {
-          })
+        apiHelper.post<Department, Department>("departments", department).then(() => {
+          navigate("/department");
+        });
       }
     }
   };

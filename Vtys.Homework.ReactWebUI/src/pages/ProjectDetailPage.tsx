@@ -2,19 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiHelper from "../helpers/apiHelper";
 import Employee from "../types/entities/Employee";
-import { Box, Button, Grid, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 import Project from "../types/entities/Project";
 import Customer from "../types/entities/Customer";
 import ProjectStatus from "../types/entities/ProjectStatus";
 import ProjectType from "../types/entities/ProjectType";
+import { DateTimePicker } from "@mui/x-date-pickers";
+import moment, { Moment } from "moment";
+import SourceDetail from "../types/models/SourceDetail";
+import ProjectSavingModel from "../types/models/ProjectSavingModel";
 
 
 const ProjectDetailPage = () => {
   const navigate = useNavigate();
-  const [project, setProject] = useState<Project>({id: 0, name: "", customerId: 0, lastStatusId: 0, projectTypeId: 0, startDate: "", finishDate: ""});
+  const [project, setProject] = useState<Project>({id: 0, name: "", customerId: 0, lastStatusId: 0, projectTypeId: 0, startDate: new Date(), finishDate: new Date()});
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [projectStatuses, setProjectStatuses] = useState<ProjectStatus[]>([]);
   const [projectTypes, setProjectTypes] = useState<ProjectType[]>([]);
+  const [sources, setSources] = useState<SourceDetail[]>([]);
+  const [sourceIds, setSourceIds] = useState<number[]>([]);
+
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -24,11 +31,11 @@ const ProjectDetailPage = () => {
   const handleSubmit = () => {
     if (project) {
       if (project.id) {
-        apiHelper.post<Project, Project>(`projects`, project)
-          .then(() => {})
+        apiHelper.post<ProjectSavingModel, Project>(`projects`, {project, sourceIds})
+          .then(() => {navigate("/project");})
       } else {
-        apiHelper.post<Project, Project>('projects', project)
-          .then(() => {
+        apiHelper.post<ProjectSavingModel, Project>('projects', {project, sourceIds})
+          .then(() => {navigate("/project");
           })
       }
     }
@@ -43,6 +50,12 @@ const ProjectDetailPage = () => {
   useEffect(() => {
     apiHelper.get<Customer[]>("customers").then((data) => {
       setCustomers(data);
+    })
+  }, [])
+
+  useEffect(() => {
+    apiHelper.get<SourceDetail[]>("sources").then((data) => {
+      setSources(data);
     })
   }, [])
 
@@ -78,64 +91,122 @@ const ProjectDetailPage = () => {
                   />
                 </Grid>
                 <Grid md={12}>
-                  <Select
-                    fullWidth
-                    value={project.customerId}
-                    label={"Müşteri"}
-                    onChange={(e) => {
+                  <DateTimePicker
+                    label="Başlangıç Tarihi"
+                    value={moment(project.startDate)}
+                    onChange={(newValue) => {
                       if (project)
                         setProject({
                           ...project,
-                          customerId: e.target.value as number,
+                          startDate: newValue?.toDate() ?? new Date(),
                         });
                     }}
-                  >
-                    {customers.map((customer) => (
-                      <MenuItem key={customer.id} value={customer.id}>
-                        {customer.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  />
                 </Grid>
                 <Grid md={12}>
-                  <Select
-                    fullWidth
-                    value={project.projectTypeId}
-                    label={"Proje Tipi"}
-                    onChange={(e) => {
+                  <DateTimePicker
+                    label="Bitiş Tarihi"
+                    value={moment(project.finishDate)}
+                    onChange={(newValue) => {
                       if (project)
                         setProject({
                           ...project,
-                          projectTypeId: e.target.value as number,
+                          finishDate: newValue?.toDate() ?? new Date(),
                         });
                     }}
-                  >
-                    {projectTypes.map((projectType) => (
-                      <MenuItem key={projectType.id} value={projectType.id}>
-                        {projectType.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  />
                 </Grid>
                 <Grid md={12}>
-                  <Select
-                    fullWidth
-                    value={project.lastStatusId}
-                    label={"Proje Durumu"}
-                    onChange={(e) => {
-                      if (project)
-                        setProject({
-                          ...project,
-                          lastStatusId: e.target.value as number,
-                        });
-                    }}
-                  >
-                    {projectStatuses.map((projectStatus) => (
-                      <MenuItem key={projectStatus.id} value={projectStatus.id}>
-                        {projectStatus.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                  <FormControl fullWidth>
+                    <InputLabel>Müşteri</InputLabel>
+                    <Select
+                      fullWidth
+                      value={project.customerId}
+                      label={"Müşteri"}
+                      onChange={(e) => {
+                        if (project)
+                          setProject({
+                            ...project,
+                            customerId: e.target.value as number,
+                          });
+                      }}
+                    >
+                      {customers.map((customer) => (
+                        <MenuItem key={customer.id} value={customer.id}>
+                          {customer.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid md={12}>
+                  <FormControl fullWidth>
+                    <InputLabel>Kaynaklar</InputLabel>
+                    <Select
+                      multiple
+                      fullWidth
+                      label={"Kaynaklar"}
+                      value={sourceIds}
+                      onChange={(e) => {
+                        setSourceIds(e.target.value as []);
+                      }}
+                    >
+                      {sources.map((source) => (
+                        <MenuItem key={source.id} value={source.id}>
+                          {source.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid md={12}>
+                  <FormControl fullWidth>
+                    <InputLabel>Proje Tipi</InputLabel>
+                    <Select
+                      fullWidth
+                      value={project.projectTypeId}
+                      label={"Proje Tipi"}
+                      onChange={(e) => {
+                        if (project)
+                          setProject({
+                            ...project,
+                            projectTypeId: e.target.value as number,
+                          });
+                      }}
+                    >
+                      {projectTypes.map((projectType) => (
+                        <MenuItem key={projectType.id} value={projectType.id}>
+                          {projectType.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid md={12}>
+                  <FormControl fullWidth>
+                    <InputLabel>Proje Durumu</InputLabel>
+                    <Select
+                      fullWidth
+                      value={project.lastStatusId}
+                      label={"Proje Durumu"}
+                      onChange={(e) => {
+                        if (project)
+                          setProject({
+                            ...project,
+                            lastStatusId: e.target.value as number,
+                          });
+                      }}
+                    >
+                      {projectStatuses.map((projectStatus) => (
+                        <MenuItem
+                          key={projectStatus.id}
+                          value={projectStatus.id}
+                        >
+                          {projectStatus.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
                 </Grid>
                 <Grid md={12}>
                   <Grid container justifyContent={"space-between"}>

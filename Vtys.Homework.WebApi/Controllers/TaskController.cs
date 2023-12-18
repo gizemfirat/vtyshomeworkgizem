@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Vtys.Core.ExtensionMethods;
 using Vtys.Homework.Business.Abstract;
+using Vtys.Homework.Entities.ComplexTypes;
 using Vtys.Homework.Entities.Concrete;
 
 namespace Vtys.Homework.WebApi.Controllers
@@ -40,7 +41,7 @@ namespace Vtys.Homework.WebApi.Controllers
 
         [HttpPost]
         [Route("api/tasks")]
-        public IActionResult Save([FromBody] Entities.Concrete.Task task)
+        public IActionResult Save([FromBody] TaskSavingModel task)
         {
             return new ContentResult
             {
@@ -58,6 +59,30 @@ namespace Vtys.Homework.WebApi.Controllers
             {
                 ContentType = "application/json",
                 Content = _taskService.DeleteById(id).ToJson(),
+                StatusCode = 200,
+            };
+        }
+
+        [HttpGet]
+        [Route("api/tasks/taskSources")]
+        public IActionResult GetWithAllDetail()
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _taskService.GetAllSources().ToJson(),
+                StatusCode = 200,
+            };
+        }
+
+        [HttpGet]
+        [Route("api/tasks/{id}/history")]
+        public IActionResult GetHistory(long id)
+        {
+            return new ContentResult
+            {
+                ContentType = "application/json",
+                Content = _taskService.GetHistory(id).ToJson(),
                 StatusCode = 200,
             };
         }

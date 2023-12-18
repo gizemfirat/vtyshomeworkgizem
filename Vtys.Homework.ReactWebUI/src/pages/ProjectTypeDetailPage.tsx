@@ -19,10 +19,10 @@ const ProjectTypeDetailPage = () => {
     if (projectType) {
       if (projectType.id) {
         apiHelper.post<ProjectType, ProjectType>(`projectTypes`, projectType)
-          .then(() => {})
+          .then(() => {navigate("/projectType");})
       } else {
         apiHelper.post<ProjectType, ProjectType>('projectTypes', projectType)
-          .then(() => {
+          .then(() => {navigate("/projectType");
           })
       }
     }

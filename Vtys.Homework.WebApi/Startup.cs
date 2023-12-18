@@ -12,7 +12,8 @@ namespace Vtys.Homework.WebApi
         {
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
+
 
             services.AddCors(options =>
             {
