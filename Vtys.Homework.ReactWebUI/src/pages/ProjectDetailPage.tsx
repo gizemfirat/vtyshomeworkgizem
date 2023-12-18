@@ -4,24 +4,24 @@ import apiHelper from "../helpers/apiHelper";
 import Employee from "../types/entities/Employee";
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 import Project from "../types/entities/Project";
+import SourceDetail from "../types/models/SourceDetail";
 import Customer from "../types/entities/Customer";
 import ProjectStatus from "../types/entities/ProjectStatus";
 import ProjectType from "../types/entities/ProjectType";
-import { DateTimePicker } from "@mui/x-date-pickers";
-import moment, { Moment } from "moment";
-import SourceDetail from "../types/models/SourceDetail";
 import ProjectSavingModel from "../types/models/ProjectSavingModel";
+import ProjectWithSourceIds from "../types/models/ProjectWithSourceIds";
+import { DateTimePicker } from "@mui/x-date-pickers";
+import moment from "moment";
 
 
 const ProjectDetailPage = () => {
   const navigate = useNavigate();
-  const [project, setProject] = useState<Project>({id: 0, name: "", customerId: 0, lastStatusId: 0, projectTypeId: 0, startDate: new Date(), finishDate: new Date()});
+  const [project, setProject] = useState<Project>({id: 0, name: "", customerId: 0 , lastStatusId: 0, projectTypeId: 0, startDate: new Date(), finishDate: new Date()});
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [projectStatuses, setProjectStatuses] = useState<ProjectStatus[]>([]);
   const [projectTypes, setProjectTypes] = useState<ProjectType[]>([]);
   const [sources, setSources] = useState<SourceDetail[]>([]);
   const [sourceIds, setSourceIds] = useState<number[]>([]);
-
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -31,21 +31,28 @@ const ProjectDetailPage = () => {
   const handleSubmit = () => {
     if (project) {
       if (project.id) {
-        apiHelper.post<ProjectSavingModel, Project>(`projects`, {project, sourceIds})
-          .then(() => {navigate("/project");})
+        apiHelper
+          .post<ProjectSavingModel, Project>(`projects`, {project, sourceIds})
+          .then(() => {
+            navigate("/project");
+          });
       } else {
-        apiHelper.post<ProjectSavingModel, Project>('projects', {project, sourceIds})
-          .then(() => {navigate("/project");
-          })
+        apiHelper
+          .post<ProjectSavingModel, Project>("projects", {project, sourceIds})
+          .then(() => {
+            navigate("/project");
+          });
       }
     }
   };
 
   useEffect(() => {
-    apiHelper.get<Project>(`projects/${id}`).then((data) => {
-      setProject(data);
-    })
-  }, [id])
+    if (id)
+      apiHelper.get<ProjectWithSourceIds>(`projects/${id}`).then((data) => {
+        setProject(data.project);
+        setSourceIds(data.sourceIds);
+      });
+  }, [id]);
 
   useEffect(() => {
     apiHelper.get<Customer[]>("customers").then((data) => {
@@ -85,8 +92,7 @@ const ProjectDetailPage = () => {
                     label={"Ad"}
                     value={project?.name}
                     onChange={(e) => {
-                      if (project)
-                        setProject({ ...project, name: e.target.value });
+                      if (project) setProject({ ...project, name: e.target.value });
                     }}
                   />
                 </Grid>
@@ -118,11 +124,11 @@ const ProjectDetailPage = () => {
                 </Grid>
                 <Grid md={12}>
                   <FormControl fullWidth>
-                    <InputLabel>Müşteri</InputLabel>
+                    <InputLabel>Müşteriler</InputLabel>
                     <Select
                       fullWidth
                       value={project.customerId}
-                      label={"Müşteri"}
+                      label={"Müşteriler"}
                       onChange={(e) => {
                         if (project)
                           setProject({
@@ -198,10 +204,7 @@ const ProjectDetailPage = () => {
                       }}
                     >
                       {projectStatuses.map((projectStatus) => (
-                        <MenuItem
-                          key={projectStatus.id}
-                          value={projectStatus.id}
-                        >
+                        <MenuItem key={projectStatus.id} value={projectStatus.id}>
                           {projectStatus.name}
                         </MenuItem>
                       ))}

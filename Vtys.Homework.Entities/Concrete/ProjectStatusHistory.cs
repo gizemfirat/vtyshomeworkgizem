@@ -8,5 +8,7 @@ namespace Vtys.Homework.Entities.Concrete
         public long StatusId { get; set; }
 
         public long ProjectId { get; set; }
+
+        public DateTime InsertedDate { get; set; }
     }
 }

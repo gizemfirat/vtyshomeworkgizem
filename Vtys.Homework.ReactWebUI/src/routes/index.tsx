@@ -28,6 +28,7 @@ import ProjectStatusDetailPage from "../pages/ProjectStatusDetailPage";
 import TaskStatusPage from "../pages/TaskStatusPage";
 import TaskStatusDetailPage from "../pages/TaskStatusDetailPage";
 import TaskStatusHistoryPage from "../pages/TaskStatusHistoryPage";
+import ProjectStatusHistoryPage from "../pages/ProjectStatusHistoryPage";
 
 const Routes = () => useRoutes([{
   path:"/",
@@ -61,7 +62,8 @@ const Routes = () => useRoutes([{
     {path: "projectStatuses/detail", element: <ProjectStatusDetailPage/>},
     {path: "taskStatus", element: <TaskStatusPage/>},
     {path: "taskStatuses/detail", element: <TaskStatusDetailPage/>},
-    {path: "task/history", element: <TaskStatusHistoryPage/>}
+    {path: "task/history", element: <TaskStatusHistoryPage/>},
+    {path: "project/history", element: <ProjectStatusHistoryPage/>}
   ]
 }]);
 

@@ -28,7 +28,9 @@ namespace Vtys.Homework.Business.Concrete
         public IResult GetById(long id)
         {
             var project = Repository.Get<Project>(x => x.Id == id);
-            return new SuccessResult("", project);
+            var sourceIds = Repository.GetList<ProjectSource>(x => x.ProjectId == project.Id).Select(x => x.SourceId);
+            var result = new { Project = project, SourceIds = sourceIds };
+            return new SuccessResult("", result);
         }
 
         [ExceptionResultAspect]
@@ -93,6 +95,24 @@ namespace Vtys.Homework.Business.Concrete
             var sourceIds = projectSources.Select(x => x.SourceId);
             var sources = Repository.GetList<Source>(x => sourceIds.Contains(x.Id));
             return new SuccessResult("", sources);
+        }
+
+        [ExceptionResultAspect]
+        public IResult GetHistory(long projectId)
+        {
+            var projectStatusHistories = Repository.GetList<ProjectStatusHistory>(x => x.ProjectId == projectId);
+            var statusIds = projectStatusHistories.Select(x => x.StatusId);
+            var projectStatuses = Repository.GetList<ProjectStatus>(x => statusIds.Contains(x.Id));
+            var result = (from psh in projectStatusHistories
+                          join ps in projectStatuses on psh.StatusId equals ps.Id
+                          orderby psh.InsertedDate descending
+                          select new
+                          {
+                              Name = ps.Name,
+                              Date = psh.InsertedDate
+                          });
+
+            return new SuccessResult("", result);
         }
     }
 }
