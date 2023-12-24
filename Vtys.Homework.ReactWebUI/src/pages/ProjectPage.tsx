@@ -38,6 +38,7 @@ const ProjectPage = () => {
                       <TableCell align="right">Son Durum</TableCell>
                       <TableCell align="right"></TableCell>
                       <TableCell align="right"></TableCell>
+                      <TableCell align="right"></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -56,7 +57,16 @@ const ProjectPage = () => {
                         <TableCell align="right">
                           {project.lastStatusId}
                         </TableCell>
-
+                        <TableCell align="right">
+                          <Button
+                            onClick={() => {
+                              navigate(`/project/history?id=${project.id}`);
+                            }}
+                            size="small"
+                          >
+                            Tarihçe
+                          </Button>
+                        </TableCell>
                         <TableCell align="right">
                           <Button
                             onClick={() => {

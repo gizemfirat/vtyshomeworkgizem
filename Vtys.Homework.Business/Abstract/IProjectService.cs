@@ -16,5 +16,7 @@ namespace Vtys.Homework.Business.Abstract
         IResult GetSources(long projectId);
 
         IResult GetAllSources();
+
+        IResult GetHistory(long projectId);
     }
 }
